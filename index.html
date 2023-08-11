@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="script.js" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900;9..40,1000&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <title>Employee Management</title>
+</head>
+
+<body>
+
+    <div class="container ">
+        <div class="maincontent">
+            <!-- side bar -->
+
+            <div class="side-bar">
+                <div class="title">
+                    Employee
+                    <p>Management</p>
+                </div>
+                <hr>
+                <div class="side-menu-list">
+                    <ul class="side-menu-items">
+                        <li><a href="#"><i class="material-symbols-outlined">home</i>Dashboard</a></li>
+                        <li><a href="#"><i class="material-symbols-outlined">bar_chart</i>Employees</a></li>
+                        <li><a href="#"><i class="material-symbols-outlined">person</i>My Profile</a></li>
+                        <li><a href="#"><i class="material-symbols-outlined">logout</i>Logout</a></li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="sitelogo">
+                    Powered by
+                    <img src="assets/brandlogo.png">
+                </div>
+            </div>
+
+            <!-- end of side bar -->
+
+
+
+            <div class="mainlist">
+                <!-- main head -->
+                <div class="main">
+                    <div class="mainhead">
+                        <p>Dashboard / Employees</p>
+                    </div>
+
+                    <!-- search bar -->
+                    <div class="searchbar">
+                        <input type="text" class="" placeholder="search... &#128270">
+                        <button class="notificationbtn"><i
+                                class="material-symbols-outlined bell">notifications</i></button>
+                        <img class="searchbar-profile-img" src="assets/dp1.png">
+                    </div>
+                </div>
+                <!-- end of search bar -->
+
+                <div class="heading">
+                    Employees
+                </div>
+                <div class="employee-details">
+                    <div class="employees-list">
+                        <div class="emp-list">
+                            <label for='employees-list'>
+                                <p>Employees List</p>
+                            </label>
+                            <select class="employees-select" id='employees-list' name='number'>
+
+                                <option value='one'>1</option>
+                                <option value='two'>2</option>
+                                <option value='three'>3</option>
+                            </select>
+                            <div class="counttext">of 10</div>
+                        </div>
+
+                        <div class="btnemp">
+                            <button class="addbtn" id="emp_add">Add Employee</button>
+                        </div>
+
+                    </div>
+
+                    <table class="table">
+
+                        <thead class="table-row">
+
+                            <td class="table-head">
+
+                                <!-- roll no -->
+                                <select class="roll table-drpdwn " id="rollnumber">
+                                    <option>SI No</option>
+                                </select>
+                            </td>
+
+                            <!-- name -->
+                            <td class="table-head">
+                                <select class="name table-drpdwn" id="employee-name">
+                                    <option>Name</option>
+                                </select>
+                            </td>
+
+                            <!-- email -->
+                            <td class="table-head">
+                                <select class="email table-drpdwn" id="email">
+                                    <option>Email</option>
+                                </select>
+                            </td>
+
+                            <!-- phone -->
+                            <td class="table-head">
+                                <select class="phone table-drpdwn" id="phonenumber">
+                                    <option>Phone</option>
+                                </select>
+                            </td>
+
+                            <!-- gender -->
+                            <td class="table-head">
+                                <select class="gender table-drpdwn" id="gender">
+                                    <option>Gender</option>
+                                </select>
+                            </td>
+
+                            <!-- dob -->
+                            <td class="table-head">
+                                <select class="dateofbirth table-drpdwn" id="dob">
+                                    <option>DOB</option>
+                                </select>
+                            </td>
+
+                            <!-- country -->
+                            <td class="table-head">
+
+                                <select class="country table-drpdwn" id="country">
+                                    <option>Country</option>
+
+                                </select>
+                            </td>
+                            <!-- 3 dot -->
+                            <td class="dot">
+
+                            </td>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                            <!-- table items -->
+
+                            <tr class="emp-column">
+                                <td>#01</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button>
+                                    <!-- 3 dot dropdown menu -->
+                                    <div class="dropdown-content">
+                                        <ul>
+                                            <li><a href="#" id="viewprofile_emp">View</a></li>
+                                            <li><a href="#" id="editprofile_emp">Edit</a></li>
+                                            <li> <a href="#" id="deleteprofile_emp">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- end of 3 dot dropdown menu -->
+                                </td>
+
+
+                            </tr>
+
+                            <tr class="emp-column">
+                                <td>#02</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#03</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#04</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#05</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#06</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#07</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#08</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#09</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td><button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button></td>
+
+                            </tr>
+                            <tr class="emp-column">
+                                <td>#10</td>
+                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
+                                <td>michaeljohnson@example.com</td>
+                                <td>5551234567</td>
+                                <td>Male</td>
+                                <td>10 December 1985</td>
+                                <td>USA</td>
+                                <td>
+                                    <button class="dot material-symbols-outlined">
+                                        more_horiz
+                                    </button>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <!-- end of table items -->
+                </div>
+                <!-- pagination -->
+                <div class="pagination">
+                    <button class="pagination-icon material-symbols-outlined">keyboard_double_arrow_left</button>
+                    <button class="pagination-icon material-symbols-outlined">navigate_before</button>
+                    <button class="pagination-icon">1</button>
+                    <button class="pagination-icon">2</button>
+                    <button class="pagination-icon">3</button>
+                    <button class="pagination-icon">...</button>
+                    <button class="pagination-icon">10</button>
+                    <button class="pagination-icon material-symbols-outlined">navigate_next</button>
+                    <button class="pagination-icon material-symbols-outlined">keyboard_double_arrow_right</button>
+                </div>
+                <!-- end of pagination -->
+                <!-- <hr style=" color: 1px solid #D3D8E2;padding-bottom: 10px;"> -->
+                <footer class="terms-and-condition">
+                    <div class="copyright-txt">© 2023 All Rights Reserved. Stackup</div>
+                    <div class="others">
+                        <div class="terms-text">Terms</div>
+                        <div class="privacy-text">Privacy Policy</div>
+                    </div>
+
+                </footer>
+            </div>
+        </div>
+
+        <!-- add employee form -->
+
+        <div class="employee-form" id="emp-form">
+            <div class="form-contents">
+                <div class="custom-form">
+                    <div class="contents">
+                        <div class="form-heading">
+                            <label class="form-heading">Add Employee</label>
+                            <button class="close" id="close_id"><i class="material-symbols-outlined closesymbol">
+                                    close
+                                </i></button>
+                        </div>
+                        <div class="upload">
+                            <img src="assets/upload.png" alt="">
+                            <p style="color:#4318FF">Upload image</p>
+                            <div class="formattext">PNG, JPG files are allowed</div>
+                        </div>
+                        <!-- first input row -->
+                        <div class="row">
+                            <div class="form-group col-2 ">
+                                <label for="salutation" class="required mb-3 textbox_head">Salutation</label>
+                                <select class=" form-control form-select rounded-4 input_box mb-3" id="salutation"
+                                    name="salutation">
+                                    <option></option>
+                                    <option>Mr.</option>
+                                    <option>Mrs.</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-5">
+                                <label for="firstName" class="required mb-3 textbox_head">First Name</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="firstName"
+                                    name="firstName" placeholder="Enter your first name">
+                            </div>
+                            <div class="form-group col-5">
+                                <label for="lastName" class="required mb-3 textbox_head">Last Name</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="lastName"
+                                    name="lastName" placeholder="Enter your last name">
+                            </div>
+                        </div>
+                        <!-- end of first input row -->
+
+                        <!-- second input row -->
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="email" class="required mb-3 textbox_head">Email</label>
+                                <input type="email" class="input_box form-control rounded-4 mb-3" id="email"
+                                    name="email" placeholder="mail@simmmple.com">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="number" class="required mb-3 textbox_head">Mobile Number</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="number"
+                                    name="number" placeholder="enter mobile number">
+                            </div>
+                        </div>
+                        <!-- end of second input row -->
+
+                        <!-- third input row -->
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="date" class="required textbox_head mb-3">Date of Birth</label>
+                                <input type="date" class="input_box form-control rounded-4" id="date" name="date">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="gender" class="required  textbox_head">Gender</label>
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="radio" name="gender" id="male">
+
+                                    <label class="form-check-label textbox_head" for="male">Male</label>
+
+                                    <label class="form-check-label textbox_head" for="Female">
+                                        <input class="form-check-input ms-2 me-2 " type="radio" name="gender"
+                                            id="Female">Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of third input row -->
+
+                        <!-- fourth row -->
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="Address" class="required mb-1 textbox_head mb-3">Address</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="Address"
+                                    name="Address" placeholder="enter address">
+                            </div>
+                        </div>
+                        <!-- end of fourth row -->
+
+                        <!-- fifth row -->
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="country" class="required textbox_head mb-3">Country</label>
+                                <select class="input_box form-control form-select rounded-4 mb-3" id="country"
+                                    name="country">
+                                    <option>Select country</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="state" class="required textbox_head mb-3">State</label>
+                                <select class="input_box form-control form-select rounded-4" id="state" name="state">
+                                    <option>Select state</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- end of fifth row -->
+
+                        <!-- sixth row -->
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="city" class="required textbox_head mb-3">City</label>
+                                <select class="input_box form-control form-select rounded-4" id="city" name="city">
+                                    <option>Select city</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="pincode" class="required textbox_head mb-3">Pin/Zip</label>
+                                <input type="text" class="input_box form-control form-select rounded-4" id="pincode"
+                                    name="pincode" placeholder="enter Pin/Zip">
+                            </div>
+                        </div>
+                        <!-- end of sixth row -->
+
+                        <!-- submit cancel buttoon -->
+                        <div class=" row  ">
+                            <div class="final_submit  mb-3  p-3 col bg-white rounded-3  ">
+                                <div class="contents_submit ">
+                                    <button class="final_abort">Cancel</button>
+                                    <button class="submission">Add Employee</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  endsubmit button -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--3 dot  list  -->
+
+
+        <!-- end of 3dot list -->
+    </div>
+
+    <!-- end of employee form -->
+
+
+</body>
+
+</html>

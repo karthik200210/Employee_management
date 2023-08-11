@@ -1,0 +1,517 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+
+}
+
+.container {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    max-width: 1350px !important;
+
+}
+
+.maincontent {
+    display: flex;
+
+
+}
+
+/* side bar */
+.side-bar {
+    background: linear-gradient(162deg, #301F81 0%, #0F0441 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+.mainlist {
+    background: #F4F7FE;
+
+
+}
+
+.title {
+    color: white;
+    padding-left: 29px;
+    padding-top: 29px;
+    padding-bottom: 29px;
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.title p {
+    font-size: 23px;
+    font-weight: 300 !important;
+}
+
+.side-menu-list {
+   
+    padding-top: 42px;
+    padding-right: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 300px;
+    flex-grow: 1;
+}
+
+.side-menu-items li {
+    list-style-type: none;
+    margin-bottom: 25px;
+
+}
+
+.side-menu-items li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.70);
+    display: inline-flex;
+    align-items: center;
+
+}
+
+.side-menu-items li {
+    display: flex;
+    align-items: center;
+
+}
+
+.side-menu-items li i.material-symbols-outlined {
+    margin-right: 10px;
+}
+
+.sitelogo {
+    font-size: 10px;
+    color: white;
+    margin-top: 15px;
+    margin-left: 5px;
+    display: inline flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+
+}
+
+/* end of side bar */
+
+/* main content */
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainhead p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #707EAE;
+    margin-left: 22px;
+    margin-top: 22px;
+}
+
+.mainlist {
+    width: 100%;
+}
+
+
+
+/* search bar */
+.searchbar {
+
+    height: 60px !important;
+    border-radius: 30px !important;
+    background: #FFF;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: inline-flex;
+    padding-right: 20px;
+    align-items: center;
+    position: relative;
+    gap: 15px;
+}
+
+.searchbar input {
+
+    border-radius: 30px;
+    border: transparent;
+    background-color: #F4F7FE;
+    padding: 12px 8px  !important;
+    margin-left: 10px;
+}
+
+.search-icon {
+    color: #2B3674;
+
+}
+
+.bell {
+    color: #A3AED0;
+}
+
+.notificationbtn {
+    background-color: transparent;
+    border: transparent;
+}
+
+.searchbar-profile-img {
+    border-radius: 100%;
+}
+
+/* end dof search bar */
+
+/* headinng main */
+
+.heading {
+    margin: 22px;
+    font-size: 34px;
+    font-weight: 700;
+    color: #2B3674;
+}
+
+.employees-list {
+    display: flex;
+
+}
+
+.employees-list p {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2B3674;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+
+.employee-details {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.employees-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.emp-list {
+    display: flex;
+    align-items: center;
+    padding: 16px 0px 37.557px 0px;
+
+}
+
+.employees-select {
+    width: 70px;
+    height: 42px;
+    padding: 8px 15px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    margin-top: 15px;
+    color: #333;
+}
+
+.counttext {
+    margin-top: 22px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.addbtn {
+    padding: 16px;
+    background-color: #4318FF;
+    color: #FFF;
+    border-radius: 10px;
+    border: transparent;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 500;
+   
+}
+.btnemp{
+    position: relative;
+}
+/* end of main head */
+
+/* table */
+.table {
+    border-collapse: collapse;
+    text-align: left;
+    padding-left: 10px;
+    width: 100%;   
+   
+}
+.tbody{
+    vertical-align: unset !important;
+}
+.table-row {
+    border-bottom: 1px solid #D3D8E2;
+    padding-left: 10px;
+
+}
+
+
+.table-drpdwn {
+    background-color: transparent;
+    border: transparent;
+    color: #8B95B7;
+    margin-left: 12px;
+}
+
+.emp-column {
+    border-bottom: 1px solid #D3D8E2 !important;
+}
+
+.emp-column:last-child {
+    border-bottom: transparent !important;
+}
+
+.emp-column td {
+    padding: 15px 10px !important;
+    font-size: 14px !important;
+    color: #2B3674 !important;
+    font-weight: 700 !important;
+   
+}
+
+.profile-img {
+    vertical-align: middle;
+    margin-top: -10px !important;
+    margin-right: 5px;
+}
+
+.dot {
+    padding: 5px;
+    border: transparent;
+    border-radius: 10px;
+    width: 37px;
+    height: 37px;
+    color: #4318FF;
+}
+
+/* end of table */
+
+/* pagination */
+
+.pagination {
+    display: flex;
+    justify-content: end;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    gap: 10px;
+
+}
+
+.pagination-icon {
+    background-color: #FFF;
+    border: transparent;
+    border-radius: 8px;
+    border: transparent;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: space-between;
+    color: #4318FF;
+}
+
+.pagination-icon:hover {
+    background-color: #F4F7FE;
+}
+
+/* end of pagination */
+
+/* footer */
+.terms-and-condition {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.copyright-txt {
+    color: #707EAE;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.terms-text {
+    color: #707EAE;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.others {
+    display: flex;
+    justify-content: space-between;
+}
+
+.privacy-text {
+    color: #707EAE;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* end of footer */
+
+/* employee add form */
+.employee-form {
+    display: none; 
+    position: absolute;
+    top: 55%;
+    left: 55%; 
+    background-color: white;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 25px 25px;
+    overflow-y: scroll;
+    max-height: 100%; 
+    
+    overflow-y: scroll; 
+    scrollbar-width: thin !important;
+    scrollbar-color: transparent !important;
+ 
+}
+.form-heading{
+    font-size: 24px;
+    font-weight: 700;
+    color: #2B3674;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.upload{
+   height:134px;
+   background-color: #FAFCFE;
+   border:1px dashed #B2BAD0;
+   border-radius: 13px;
+   margin-top: 10px;
+   margin-bottom: 25px;
+   text-align: center;
+  
+}
+.upload img{
+    margin-top: 25px;
+   
+}
+.upload p{
+    font-size: 16px;
+    font-weight: 700;
+}
+.formattext{
+    color:#8F9BBA;
+    font-size: 12px;
+    font-weight: 500;
+    
+
+}
+.form-group label.required::after {
+    content: "*";
+    color: #ff0000;
+    margin-left: 2px;
+}
+.input_box {
+    opacity: 0.5;
+    font-size: 14px !important;
+    height: 50px !important;
+    border-radius: 16px !important;
+    border: 1px solid#B6BBC7;
+    box-shadow: none !important;
+
+}
+
+.textbox_head {
+    font-size: 14px;
+    color: #2B3674;
+}
+
+.final_submit {
+    display: inline-flex;
+    justify-content: end;
+    gap: 15px;
+
+}
+
+.final_abort {
+    border: transparent;
+    background-color:#FAF9FF;
+    padding: 17px 36px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0F0441;
+}
+
+.submission {
+    border: transparent;
+    background-color:#4318FF;
+    padding: 17px 29px;
+    border-radius: 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+.close{
+    border-radius: 10px;
+    border:none;
+    align-items: center;
+    justify-content: center;
+    padding-left:7px;
+    padding-top: 7px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    background-color: #F4F7FE;
+}
+.closesymbol{
+    color:#4318FF;
+}
+
+/* end oof employee add form */
+
+/* 3 dot menu list  */
+.dropdown-content{
+    display: none;
+    background-color: white;
+    border-radius: 15px;
+    color: #0F0441;
+    text-decoration: none;
+    border-radius: 14px;
+    border: 0.5px solid #D3D8E2;
+    background: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(16, 16, 49, 0.12);
+    padding: 22px 39px;
+    z-index: 1;
+}
+.dropdown-content ul{
+    list-style-type: none;
+}
+.dropdown-content ul li a{
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+/* end of 3 dot menu */
