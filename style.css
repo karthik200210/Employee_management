@@ -36,6 +36,7 @@
     padding-left: 29px;
     padding-top: 29px;
     padding-bottom: 29px;
+    padding-right: 29px;
     font-weight: 700;
     font-size: 23px;
 }
@@ -46,9 +47,10 @@
 }
 
 .side-menu-list {
-   
+
     padding-top: 42px;
     padding-right: 40px;
+    padding-left: 40px;
     font-size: 16px;
     font-weight: 500;
     padding-bottom: 300px;
@@ -97,6 +99,7 @@
 .main {
     display: flex;
     justify-content: space-between;
+    padding-top: 10px;
 }
 
 .mainhead {
@@ -125,7 +128,6 @@
     height: 60px !important;
     border-radius: 30px !important;
     background: #FFF;
-    margin-top: 10px;
     margin-right: 10px;
     display: inline-flex;
     padding-right: 20px;
@@ -139,7 +141,7 @@
     border-radius: 30px;
     border: transparent;
     background-color: #F4F7FE;
-    padding: 12px 8px  !important;
+    padding: 12px 8px !important;
     margin-left: 10px;
 }
 
@@ -239,11 +241,13 @@
     margin-right: 10px;
     font-size: 15px;
     font-weight: 500;
-   
+
 }
-.btnemp{
+
+.btnemp {
     position: relative;
 }
+
 /* end of main head */
 
 /* table */
@@ -251,12 +255,14 @@
     border-collapse: collapse;
     text-align: left;
     padding-left: 10px;
-    width: 100%;   
-   
+    width: 100%;
+
 }
-.tbody{
+
+.tbody {
     vertical-align: unset !important;
 }
+
 .table-row {
     border-bottom: 1px solid #D3D8E2;
     padding-left: 10px;
@@ -268,11 +274,13 @@
     background-color: transparent;
     border: transparent;
     color: #8B95B7;
-    margin-left: 12px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .emp-column {
     border-bottom: 1px solid #D3D8E2 !important;
+    position: relative;
 }
 
 .emp-column:last-child {
@@ -284,7 +292,7 @@
     font-size: 14px !important;
     color: #2B3674 !important;
     font-weight: 700 !important;
-   
+
 }
 
 .profile-img {
@@ -376,10 +384,10 @@
 
 /* employee add form */
 .employee-form {
-    display: none; 
+    display: none;
     position: absolute;
     top: 55%;
-    left: 55%; 
+    left: 55%;
     background-color: white;
     transform: translate(-50%, -50%);
     background: white;
@@ -388,14 +396,14 @@
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     padding: 25px 25px;
     overflow-y: scroll;
-    max-height: 100%; 
-    
-    overflow-y: scroll; 
+    max-height: 100%;
+    overflow-y: scroll;
     scrollbar-width: thin !important;
     scrollbar-color: transparent !important;
- 
+
 }
-.form-heading{
+
+.form-heading {
     font-size: 24px;
     font-weight: 700;
     color: #2B3674;
@@ -404,36 +412,42 @@
     justify-content: space-between;
 
 }
-.upload{
-   height:134px;
-   background-color: #FAFCFE;
-   border:1px dashed #B2BAD0;
-   border-radius: 13px;
-   margin-top: 10px;
-   margin-bottom: 25px;
-   text-align: center;
-  
+
+.upload {
+    height: 134px;
+    background-color: #FAFCFE;
+    border: 1px dashed #B2BAD0;
+    border-radius: 13px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+
 }
-.upload img{
+
+.upload img {
     margin-top: 25px;
-   
+
 }
-.upload p{
+
+.upload p {
     font-size: 16px;
     font-weight: 700;
 }
-.formattext{
-    color:#8F9BBA;
+
+.formattext {
+    color: #8F9BBA;
     font-size: 12px;
     font-weight: 500;
-    
+
 
 }
+
 .form-group label.required::after {
     content: "*";
     color: #ff0000;
     margin-left: 2px;
 }
+
 .input_box {
     opacity: 0.5;
     font-size: 14px !important;
@@ -458,7 +472,7 @@
 
 .final_abort {
     border: transparent;
-    background-color:#FAF9FF;
+    background-color: #FAF9FF;
     padding: 17px 36px;
     border-radius: 20px;
     font-size: 15px;
@@ -466,52 +480,283 @@
     color: #0F0441;
 }
 
+.final_abort:hover {
+    background-color: red;
+    color: white;
+}
+
 .submission {
     border: transparent;
-    background-color:#4318FF;
+    background-color: #4318FF;
     padding: 17px 29px;
     border-radius: 20px;
     color: white;
     font-size: 15px;
     font-weight: 700;
 }
-.close{
-    border-radius: 10px;
-    border:none;
+
+.submission:hover {
+    background-color: #4FBF26;
+    color: white;
+}
+
+.close {
+    border: none;
     align-items: center;
     justify-content: center;
-    padding-left:7px;
-    padding-top: 7px;
-    padding-right: 6px;
-    padding-bottom: 4px;
-    background-color: #F4F7FE;
+    background-color: transparent;
 }
-.closesymbol{
-    color:#4318FF;
+
+.closesymbol:hover {
+    color: red;
+}
+
+.closesymbol {
+    color: #4318FF;
 }
 
 /* end oof employee add form */
 
 /* 3 dot menu list  */
-.dropdown-content{
+.dropdown-content {
     display: none;
     background-color: white;
     border-radius: 15px;
-    color: #0F0441;
     text-decoration: none;
     border-radius: 14px;
     border: 0.5px solid #D3D8E2;
     background: #FFF;
     box-shadow: 0px 1px 4px 0px rgba(16, 16, 49, 0.12);
-    padding: 22px 39px;
+    padding: 22px 20px;
     z-index: 1;
+    position: absolute;
+    right: 25px;
+    top: 35px;
 }
-.dropdown-content ul{
+
+/* disabling bootsrap styles */
+ol,
+ul {
+    padding-left: none !important;
+
+}
+
+ol,
+ul {
+    padding-left: unset !important;
+}
+
+dl,
+ol,
+ul {
+    margin-top: 0;
+    margin-bottom: 0 !important;
+}
+
+/* end of disabling bootstrap styles */
+
+
+.dropdown-content ul {
     list-style-type: none;
 }
-.dropdown-content ul li a{
+
+.icon {
+    /*  for coloring icons in 3 dot  */
+    color: #8B95B7;
+}
+
+.option-menu {
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
+    color: #2B3674;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+    background-color: transparent;
+    border: none;
 }
+
+.option-menu-button {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4318FF;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 41px;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.option-menu-button:hover {
+    background-color: red;
+    color: white;
+}
+
 /* end of 3 dot menu */
+
+/* edit employee form */
+.edit-employee-form {
+    display: none;
+    border-radius: 15px;
+    text-decoration: none;
+    border-radius: 14px;
+    border: 0.5px solid #D3D8E2;
+    background: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(16, 16, 49, 0.12);
+    padding: 22px 20px;
+    z-index: 1;
+    position: absolute;
+    right: 310px;
+    top: 35px;
+    overflow-y: scroll;
+    scrollbar-width: thin !important;
+    scrollbar-color: transparent !important;
+    max-height: 100%;
+}
+
+.img-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.change_btn {
+    width: 108px;
+    height: 40px;
+    border-radius: 20px;
+    border: transparent;
+    color: #4318FF;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #EAE6FB;
+}
+.change_btn:hover{
+    background-color: #4FBF26;
+    color: white;
+}
+
+.view-img-section {
+    height: 134px;
+    width: 140px;
+    background-color: #FAFCFE;
+    border: 1px dashed #B2BAD0;
+    border-radius: 13px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+
+}
+
+/* css for employee view page */
+.view_page_maincontent {
+    display: flex;
+    background: #F4F7FE;
+}
+
+.viewpage {
+    width: 100vw;
+}
+
+.viewpage_header {
+    display: flex;
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 10px;
+
+}
+
+.main-second-head {
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    color: #2B3674;
+}
+
+.viewpage_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewpage_mainhead {
+    font-size: 14px;
+    color: #707EAE;
+    font-weight: 500;
+}
+
+/* profile section */
+.profile {
+    display: flex;
+    background-color: #FFF;
+    justify-content: center;
+}
+
+.container_view_profile {
+    margin-left: 195px;
+    margin-right: 195px;
+}
+
+.bg_image {
+    padding: 0 !important;
+    margin-left: 16px !important;
+    position: relative;
+}
+
+.profile_pic {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 0 !important;
+    justify-content: center;
+    top: 230px;
+
+}
+
+.profile_pic img {
+    border-radius: 100%;
+    border: 4px solid white;
+
+}
+
+.user_name_row {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.user_email_id_row {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #707EAE;
+
+}
+
+.details_box {
+    display: flex;
+    height: 91px;
+    padding: 21px 0px 27px 22px;
+    align-items: flex-start;
+    box-shadow: 0px 18px 40px 0px rgba(112, 144, 176, 0.12);
+
+}
+
+.details_box label {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    color: #707EAE;
+}
+
+/* end of profile section */
+
+/* css for modal box for delete popup message */

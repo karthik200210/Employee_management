@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="script.js" type="text/javascript"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="html" href="viewemployee.html">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -169,15 +170,23 @@
                                 <td>Male</td>
                                 <td>10 December 1985</td>
                                 <td>USA</td>
-                                <td><button class="dot material-symbols-outlined">
+                                <td><button class="dot material-symbols-outlined" id="dot-menu">
                                         more_horiz
                                     </button>
                                     <!-- 3 dot dropdown menu -->
-                                    <div class="dropdown-content">
+                                    <div class="dropdown-content" id="dropdown-content-menu">
                                         <ul>
-                                            <li><a href="#" id="viewprofile_emp">View</a></li>
-                                            <li><a href="#" id="editprofile_emp">Edit</a></li>
-                                            <li> <a href="#" id="deleteprofile_emp">Delete</a></li>
+                                            <li><button class="option-menu" id="viewprofile_emp"><span
+                                                        class="material-symbols-outlined icon">visibility</span> View
+                                                    Details</button></li>
+                                            <li><button class="option-menu" id="editprofile_emp"><span
+                                                        class="material-symbols-outlined icon">edit</span> Edit</button>
+                                            </li>
+                                            <li><button class="option-menu" id="deleteprofile_emp"><span
+                                                        class="material-symbols-outlined icon">delete</span>
+                                                    Delete</button></li>
+                                            <li><button class="option-menu-button" id="close-option-menu">Close</button>
+                                            </li>
                                         </ul>
                                     </div>
                                     <!-- end of 3 dot dropdown menu -->
@@ -452,8 +461,8 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="pincode" class="required textbox_head mb-3">Pin/Zip</label>
-                                <input type="text" class="input_box form-control form-select rounded-4" id="pincode"
-                                    name="pincode" placeholder="enter Pin/Zip">
+                                <input type="text" class="input_box form-control  rounded-4" id="pincode" name="pincode"
+                                    placeholder="enter Pin/Zip">
                             </div>
                         </div>
                         <!-- end of sixth row -->
@@ -473,13 +482,177 @@
             </div>
         </div>
 
-        <!--3 dot  list  -->
+        <!-- end of employee form -->
+
+        <!-- edit employee form -->
+
+        <div class="edit-employee-form" id="edit-emp-form">
+            <div class="form-contents">
+                <div class="custom-form">
+                    <div class="contents">
+                        <div class="form-heading">
+                            <label class="form-heading">Edit Employee</label>
+                            <button class=" close close_edit_emp" id="close_id_edit_emp"><i
+                                    class="material-symbols-outlined closesymbol">
+                                    close
+                                </i></button>
+                        </div>
+                        <div class="img-section">
+                            <div class="view-img-section">
+                            </div>
+                            <button class="change_btn">Change</button>
+                        </div>
+                            <!-- first input row -->
+                            <div class="row">
+                                <div class="form-group col-2 ">
+                                    <label for="salutation" class="required mb-3 textbox_head">Salutation</label>
+                                    <select class=" form-control form-select rounded-4 input_box mb-3" id="salutation"
+                                        name="salutation">
+                                        <option></option>
+                                        <option>Mr.</option>
+                                        <option>Mrs.</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="firstName" class="required mb-3 textbox_head">First Name</label>
+                                    <input type="text" class="input_box form-control rounded-4 mb-3" id="firstName"
+                                        name="firstName" placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="lastName" class="required mb-3 textbox_head">Last Name</label>
+                                    <input type="text" class="input_box form-control rounded-4 mb-3" id="lastName"
+                                        name="lastName" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <!-- end of first input row -->
+
+                            <!-- second input row -->
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="email" class="required mb-3 textbox_head">Email</label>
+                                    <input type="email" class="input_box form-control rounded-4 mb-3" id="email"
+                                        name="email" placeholder="mail@simmmple.com">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="number" class="required mb-3 textbox_head">Mobile Number</label>
+                                    <input type="text" class="input_box form-control rounded-4 mb-3" id="number"
+                                        name="number" placeholder="enter mobile number">
+                                </div>
+                            </div>
+                            <!-- end of second input row -->
+
+                            <!-- third input row -->
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="date" class="required textbox_head mb-3">Date of Birth</label>
+                                    <input type="date" class="input_box form-control rounded-4" id="date" name="date">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="gender" class="required  textbox_head">Gender</label>
+                                    <div class="form-check mt-4">
+                                        <input class="form-check-input" type="radio" name="gender" id="male">
+
+                                        <label class="form-check-label textbox_head" for="male">Male</label>
+
+                                        <label class="form-check-label textbox_head" for="Female">
+                                            <input class="form-check-input ms-2 me-2 " type="radio" name="gender"
+                                                id="Female">Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of third input row -->
+
+                            <!-- fourth row -->
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="Address" class="required mb-1 textbox_head mb-3">Address</label>
+                                    <input type="text" class="input_box form-control rounded-4 mb-3" id="Address"
+                                        name="Address" placeholder="enter address">
+                                </div>
+                            </div>
+                            <!-- end of fourth row -->
+
+                            <!-- fifth row -->
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="country" class="required textbox_head mb-3">Country</label>
+                                    <select class="input_box form-control form-select rounded-4 mb-3" id="country"
+                                        name="country">
+                                        <option>Select country</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="state" class="required textbox_head mb-3">State</label>
+                                    <select class="input_box form-control form-select rounded-4" id="state"
+                                        name="state">
+                                        <option>Select state</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end of fifth row -->
+
+                            <!-- sixth row -->
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="city" class="required textbox_head mb-3">City</label>
+                                    <select class="input_box form-control form-select rounded-4" id="city" name="city">
+                                        <option>Select city</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="pincode" class="required textbox_head mb-3">Pin/Zip</label>
+                                    <input type="text" class="input_box form-control  rounded-4" id="pincode"
+                                        name="pincode" placeholder="enter Pin/Zip">
+                                </div>
+                            </div>
+                            <!-- end of sixth row -->
+
+                            <!-- submit cancel buttoon -->
+                            <div class=" row  ">
+                                <div class="final_submit  mb-3  p-3 col bg-white rounded-3  ">
+                                    <div class="contents_submit ">
+                                        <button class="final_abort">Cancel</button>
+                                        <button class="submission">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  endsubmit button -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end of edit employee form -->
+
+            <!-- code for modal popup box for delete alert -->
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- end of modal for delete popup -->
+
+        </div>
 
 
-        <!-- end of 3dot list -->
-    </div>
-
-    <!-- end of employee form -->
 
 
 </body>
