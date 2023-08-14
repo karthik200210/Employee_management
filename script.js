@@ -117,3 +117,12 @@ document.addEventListener("DOMContentLoaded",function(){
         
     });
 });
+// for fetching the data from API
+
+fetch('http://localhost:3000/employees').then(function(res) {
+    return res.json();
+}).then(function(data) {
+    console.log(data);
+});
+
+// end of fetch data from API
