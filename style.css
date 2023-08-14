@@ -18,6 +18,17 @@
 
 }
 
+.overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    display: none;
+}
+
 /* side bar */
 .side-bar {
     background: linear-gradient(162deg, #301F81 0%, #0F0441 100%);
@@ -400,7 +411,7 @@
     overflow-y: scroll;
     scrollbar-width: thin !important;
     scrollbar-color: transparent !important;
-
+    z-index: 3;
 }
 
 .form-heading {
@@ -611,7 +622,7 @@ ul {
     background: #FFF;
     box-shadow: 0px 1px 4px 0px rgba(16, 16, 49, 0.12);
     padding: 22px 20px;
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     right: 310px;
     top: 35px;
@@ -637,7 +648,8 @@ ul {
     font-weight: 700;
     background-color: #EAE6FB;
 }
-.change_btn:hover{
+
+.change_btn:hover {
     background-color: #4FBF26;
     color: white;
 }
@@ -760,3 +772,34 @@ ul {
 /* end of profile section */
 
 /* css for modal box for delete popup message */
+.popupbody {
+    color: #2B3674 !important;
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+.final_abort_modal:hover {
+    background-color: red !important;
+    color: white !important;
+
+}
+
+.modalhead {
+    color: #2B3674 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+}
+
+.modal-backdrop {
+    display: none !important;
+}
+
+.modal-header {
+
+    border-bottom: none !important;
+
+}
+.modal-footer{
+    border-top: none !important;
+}
