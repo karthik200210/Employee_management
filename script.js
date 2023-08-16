@@ -166,6 +166,65 @@ async function readEmployee() {
             }
         });
     document.getElementById('employeetablebody').innerHTML = temp;
-    console.log("temp: " + temp);
+    
 }
 // end of fetch data from API
+
+//js for creating and submitting new user/empployee//
+const empForm_fetch = document.getElementById('addNewEmp');
+empForm_fetch.addEventListener('click', function (e) {
+    e.preventDefault();
+    
+    const salutation = document.getElementById("salutation").value;
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const number = document.getElementById("number").value;
+    const date = document.getElementById("date").value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const address = document.getElementById('Address').value;
+    const country = document.getElementById('country').value;
+    const state = document.getElementById('state').value;
+    const city = document.getElementById('city').value;
+    const pincode = document.getElementById('pincode').value;
+    
+    // Create a new employee object
+    const newEmployee = {
+        salutation,
+        firstName,
+        lastName,
+        email,
+        number,
+        date,
+        gender,
+        address,
+        country,
+        state,
+        city,
+        pincode
+    };
+
+    // Send the employee data to the server
+    fetch('http://localhost:3000/employees', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newEmployee)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Employee added:', data);
+
+        // Call a function to update the table with the new employee
+        updateTableWithNewEmployee(data);
+        
+        // Clear the form after submission
+        clearForm();
+    })
+    .catch(error => {
+        console.error('Error adding employee:', error);
+    });
+});
+
+// Rest of the code (updateTableWithNewEmployee and clearForm functions) from previous response...
