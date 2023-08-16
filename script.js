@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addButton.addEventListener("click", function () {
 
-        employeeForm.style.display ="block";
-        overlay.style.display ="block";
+        employeeForm.style.display = "block";
+        overlay.style.display = "block";
     });
 });
 //end of adding employee code//
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closeButton.addEventListener("click", function () {
 
         employeeForm.style.display = "none";
-        overlay.style.display ="none";
+        overlay.style.display = "none";
 
     });
 });
@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editDetailsLink.addEventListener("click", function () {
         editEmpForm.style.display = "block";
-        overlay.style.display ="block";
-        
+        overlay.style.display = "block";
+
     });
 });
 
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closeButton.addEventListener("click", function () {
 
         editEmpForm.style.display = "none";
-        overlay.style.display ="none";
+        overlay.style.display = "none";
 
     });
 });
@@ -94,35 +94,78 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // js for modal popup for delete 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const overlay = document.getElementById("overlay");
-    document.getElementById("deleteprofile_emp").addEventListener("click", function() {
+    document.getElementById("deleteprofile_emp").addEventListener("click", function () {
         $("#deletePopupModal").modal("show");
-        overlay.style.display="block";
+        overlay.style.display = "block";
     });
 });
- 
+
 //end of js for mmodal popup delete
+
 //js for closing modal popupp delete
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded", function () {
     const closeButtonmodal = document.getElementById("close_modal_delete");
-    const deleteModalPopupMessage=document.getElementById("deletePopupModal");
+    const deleteModalPopupMessage = document.getElementById("deletePopupModal");
     const overlay = document.getElementById("overlay");
 
-    closeButtonmodal.addEventListener("click",function(){
-        deleteModalPopupMessage.style.display="none";
-        overlay.style.display="none";
+    closeButtonmodal.addEventListener("click", function () {
+        deleteModalPopupMessage.style.display = "none";
+        overlay.style.display = "none";
 
-       
-        
+
+
     });
 });
 // for fetching the data from API
 
-fetch('http://localhost:3000/employees').then(function(res) {
-    return res.json();
-}).then(function(data) {
-    console.log(data);
-});
+readEmployee();
+async function readEmployee() {
+    let temp = '';
+    await fetch('http://localhost:3000/employees')
+        .then(function (res) {
+            return res.json();
+        }).then(function (data) {
+        
+            for (var i = 0; i < data.length; i++) {
+                const employee = data[i];
 
+                temp += `<tr class="emp-column">
+                <td>${ + (i + 1)}</td>
+                <td> <img class="profile-img" src="assets/dp2.png">${employee.firstName + " " + employee.lastName}</td>
+                <td>${employee.email}</td>
+                <td>${employee.phone}</td>
+                <td>${employee.gender}</td>
+                <td>${employee.dob}</td>
+                <td>${employee.country}</td>
+                <td><button class="dot material-symbols-outlined" id="dot-menu">
+                        more_horiz
+                    </button>
+                    <!-- 3 dot dropdown menu -->
+                    <div class="dropdown-content" id="dropdown-content-menu">
+                        <ul>
+                            <li><button class="option-menu" id="viewprofile_emp"><span
+                                        class="material-symbols-outlined icon">visibility</span> View
+                                    Details</button></li>
+                            <li><button class="option-menu" id="editprofile_emp"><span
+                                        class="material-symbols-outlined icon">edit</span> Edit</button>
+                            </li>
+                            <li><button class="option-menu" id="deleteprofile_emp"><span
+                                        class="material-symbols-outlined icon">delete</span>
+                                    Delete</button></li>
+                            <li><button class="option-menu-button" id="close-option-menu">Close</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of 3 dot dropdown menu -->
+                </td>
+                
+                
+                </tr>`;
+            }
+        });
+    document.getElementById('employeetablebody').innerHTML = temp;
+    console.log("temp: " + temp);
+}
 // end of fetch data from API
