@@ -1,3 +1,23 @@
+//function for clearing the form
+function clearForm() {
+    document.getElementById("salutation").value = "";
+    document.getElementById("firstName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("dob").value = "";
+    document.getElementById("male").checked = true; // Assuming "male" is the default
+    document.getElementById("Address").value = "";
+    document.getElementById("country").value = "";
+    document.getElementById("state").value = "";
+    document.getElementById("city").value = "";
+    document.getElementById("pincode").value = "";
+    document.getElementById("qualification").value = "";
+    document.getElementById("user_name").value = "";
+    document.getElementById("password").value = "";
+}
+
+
 // woking of this code: when we click the add employee button on the main page a form will be popped up for creating a profile of new employee//
 document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("emp_add");
@@ -11,6 +31,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 //end of adding employee code//
+
+// code for popup in add employee button
+const ConformationPopup = document.getElementById("conformationpopup");
+const AddEmpsubmit = document.getElementById("addNewEmp");
+const employeeForm = document.getElementById("emp-form");
+
+AddEmpsubmit.addEventListener("click", function () {
+    ConformationPopup.style.display = "block";
+    employeeForm.style.display = "none";
+
+
+})
+//end of add emp popup
+const closeButtonConformationPopup = document.getElementById("close_modal_conformation");
+const ConformationPopupclose = document.getElementById("conformationpopup");
+const overlay = document.getElementById("overlay");
+
+closeButtonConformationPopup.addEventListener("click", function () {
+    ConformationPopupclose.style.display = "none";
+    overlay.style.display = "none";
+})
+
+// closing emp sucess popup message
+
+// end of emp success
+// cancel button in add emp form
+const close_addempfrmbtn = document.getElementById("close_addempfrmbtn");
+close_addempfrmbtn.addEventListener("click", function () {
+    employeeForm.style.display = "none";
+    overlay.style.display = "none";
+})
 
 // working of this code: when the closing icon is clicked the form will be closed form the main screen//
 document.addEventListener("DOMContentLoaded", function () {
@@ -27,18 +78,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // end of closing employee form//
 
-// 3 dot menu//
+// js for 3 dot menu//
+function openMenu(empID) {
+    const dropDownContent = document.getElementById("dropdown-content-menu");
+    dropDownContent.innerHTML = `<ul>
+    <li><button class="option-menu" id="viewprofile_emp"><span
+                class="material-symbols-outlined icon">visibility</span> View
+            Details</button></li>
+    <li><button class="option-menu" id="editprofile_emp"><span
+                class="material-symbols-outlined icon">edit</span> Edit</button>
+    </li>
+    <li><button class="option-menu" id="deleteprofile_emp"><span
+                class="material-symbols-outlined icon">delete</span>
+            Delete</button></li>
+    <li><button class="option-menu-button" id="close-option-menu" onclick=closeMenu()>Close</button>
+    </li>
+</ul>`;
+    dropDownContent.style.display = "block";
+}
+// end of 3 dot menu view//
 
-document.addEventListener("DOMContentLoaded", function () {
-    const dotButton = document.getElementById("dot-menu");
+//closing 3dot menu
+function closeMenu() {
     const dropDownContent = document.getElementById("dropdown-content-menu");
 
-    dotButton.addEventListener("click", function () {
-        dropDownContent.style.display = "block";
-    });
-});
+    console.log("Hello1");
+    dropDownContent.style.display = "none";
+}
 
-// end of 3 dot menu view//
+//end of closing 3dot menu
 
 
 // js for edit employee//
@@ -67,20 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 });
-// end of closing button in edit employee form
 
-//end of js for edit empoyee form//
 
-// js for close button in the 3 dot option list
-document.addEventListener("DOMContentLoaded", function () {
-    const closeButtonInOptionMenu = document.getElementById("close-option-menu");
-    const dropDownContent = document.getElementById("dropdown-content-menu");
-
-    closeButtonInOptionMenu.addEventListener("click", function () {
-        dropDownContent.style.display = "none";
-    })
-})
-// end of close button in the 3 dot option list
 
 // js for view details button in 3dot list menu//
 document.addEventListener("DOMContentLoaded", function () {
@@ -127,36 +183,24 @@ async function readEmployee() {
         .then(function (res) {
             return res.json();
         }).then(function (data) {
-        
+            console.log(data);
             for (var i = 0; i < data.length; i++) {
                 const employee = data[i];
 
                 temp += `<tr class="emp-column">
-                <td>${ + (i + 1)}</td>
+                <td>${+ (i + 1)}</td>
                 <td> <img class="profile-img" src="assets/dp2.png">${employee.firstName + " " + employee.lastName}</td>
                 <td>${employee.email}</td>
                 <td>${employee.phone}</td>
                 <td>${employee.gender}</td>
                 <td>${employee.dob}</td>
                 <td>${employee.country}</td>
-                <td><button class="dot material-symbols-outlined" id="dot-menu">
+                <td><button class="dot material-symbols-outlined" id="dot-menu" onclick=openMenu('${employee.id}')>
                         more_horiz
                     </button>
                     <!-- 3 dot dropdown menu -->
                     <div class="dropdown-content" id="dropdown-content-menu">
-                        <ul>
-                            <li><button class="option-menu" id="viewprofile_emp"><span
-                                        class="material-symbols-outlined icon">visibility</span> View
-                                    Details</button></li>
-                            <li><button class="option-menu" id="editprofile_emp"><span
-                                        class="material-symbols-outlined icon">edit</span> Edit</button>
-                            </li>
-                            <li><button class="option-menu" id="deleteprofile_emp"><span
-                                        class="material-symbols-outlined icon">delete</span>
-                                    Delete</button></li>
-                            <li><button class="option-menu-button" id="close-option-menu">Close</button>
-                            </li>
-                        </ul>
+                      
                     </div>
                     <!-- end of 3 dot dropdown menu -->
                 </td>
@@ -166,7 +210,7 @@ async function readEmployee() {
             }
         });
     document.getElementById('employeetablebody').innerHTML = temp;
-    
+
 }
 // end of fetch data from API
 
@@ -174,34 +218,41 @@ async function readEmployee() {
 const empForm_fetch = document.getElementById('addNewEmp');
 empForm_fetch.addEventListener('click', function (e) {
     e.preventDefault();
-    
+
     const salutation = document.getElementById("salutation").value;
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const email = document.getElementById("email").value;
-    const number = document.getElementById("number").value;
-    const date = document.getElementById("date").value;
+    const phone = document.getElementById("phone").value;
+    const dob = document.getElementById("dob").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const address = document.getElementById('Address').value;
     const country = document.getElementById('country').value;
     const state = document.getElementById('state').value;
     const city = document.getElementById('city').value;
     const pincode = document.getElementById('pincode').value;
-    
+    const qualification = document.getElementById('qualification').value;
+    const username = document.getElementById("user_name").value;
+    const password = document.getElementById("password").value;
+
+
     // Create a new employee object
     const newEmployee = {
         salutation,
         firstName,
         lastName,
         email,
-        number,
-        date,
+        phone,
+        dob,
         gender,
         address,
         country,
         state,
         city,
-        pincode
+        pincode,
+        qualification,
+        username,
+        password
     };
 
     // Send the employee data to the server
@@ -212,19 +263,20 @@ empForm_fetch.addEventListener('click', function (e) {
         },
         body: JSON.stringify(newEmployee)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Employee added:', data);
+        .then(response => response.json())
+        .then(data => {
+            console.log('Employee added:', data);
 
-        // Call a function to update the table with the new employee
-        updateTableWithNewEmployee(data);
-        
-        // Clear the form after submission
-        clearForm();
-    })
-    .catch(error => {
-        console.error('Error adding employee:', error);
-    });
+            // Call a function to update the table with the new employee
+            // Function to clear the form fields
+
+            clearForm();
+
+        })
+        .catch(error => {
+            console.error('Error adding employee:', error);
+        });
+
 });
 
-// Rest of the code (updateTableWithNewEmployee and clearForm functions) from previous response...
+

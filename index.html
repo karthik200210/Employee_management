@@ -275,8 +275,8 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="number" class="required mb-3 textbox_head">Mobile Number</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="number"
-                                    name="number" placeholder="enter mobile number">
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="phone"
+                                    name="phone" placeholder="enter mobile number" >
                             </div>
                         </div>
                         <!-- end of second input row -->
@@ -285,18 +285,18 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="date" class="required textbox_head mb-3">Date of Birth</label>
-                                <input type="date" class="input_box form-control rounded-4" id="date" name="date">
+                                <input type="date" class="input_box form-control rounded-4" id="dob" name="date">
                             </div>
                             <div class="form-group col-6">
                                 <label for="gender" class="required  textbox_head">Gender</label>
                                 <div class="form-check mt-4">
-                                    <input class="form-check-input" type="radio" name="gender" id="male">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
 
-                                    <label class="form-check-label textbox_head" for="male">Male</label>
+                                    <label class="form-check-label textbox_head" for="male" >Male</label>
 
                                     <label class="form-check-label textbox_head" for="Female">
                                         <input class="form-check-input ms-2 me-2 " type="radio" name="gender"
-                                            id="Female">Female
+                                            id="Female" value="Female">Female
                                     </label>
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="Address" class="required mb-1 textbox_head mb-3">Qualifications</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="Qualification"
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="qualification"
                                     name="Address" placeholder=" Enter Qualifications">
                             </div>
                         </div>
@@ -359,11 +359,27 @@
                         </div>
                         <!-- end of sixth row -->
 
+                        <!-- userid and password -->
+                          <!-- sixth row -->
+                          <div class="row">
+                            <div class="form-group col-6">
+                                <label for="city" class="required textbox_head mb-3">User Name</label>
+                                <input type="text" class="input_box form-control  rounded-4" id="user_name"
+                                placeholder="Enter user name">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="pincode" class="required textbox_head mb-3">Password</label>
+                                <input type="text" class="input_box form-control  rounded-4" id="password" name="password"
+                                    placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <!-- end of user id and password -->
+
                         <!-- submit cancel buttoon -->
                         <div class=" row  ">
                             <div class="final_submit  mb-3  p-3 col bg-white rounded-3  ">
                                 <div class="contents_submit ">
-                                    <button class="final_abort">Cancel</button>
+                                    <button class="final_abort" id="close_addempfrmbtn">Cancel</button>
                                     <button class="submission" type="submit" id="addNewEmp">Add Employee</button>
                                 </div>
                             </div>
@@ -544,6 +560,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal box for conformation popup -->
+        <div class="modal  conformationpopup" id="conformationpopup" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered rounded-4" role="document">
+                <div class="modal-content rounded-4">
+                    <div class="modal-header ">
+                        <div class="modal-title  conformationpopupheading" id="exampleModalCenterTitle">SUCCESS</div>
+                        <button class=" close close_edit_emp" id="close_modal_conformation"><i
+                                class="material-symbols-outlined closesymbol">
+                                close
+                            </i></button>
+                    </div>
+                    <div class="modal-body popupbody">
+                        Employee added Sucessfully!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of conformation -->
     </div>
 
     <!-- end of modal for delete popup -->
@@ -557,3 +593,4 @@
 </body>
 
 </html>
+<!--    -->
