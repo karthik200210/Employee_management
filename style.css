@@ -336,7 +336,7 @@
 
 }
 
-.pagination-icon {
+.pagination button {
     background-color: #FFF;
     border: transparent;
     border-radius: 8px;
@@ -347,6 +347,12 @@
     justify-content: space-between;
     color: #4318FF;
 }
+.PageNumBtns{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 
 .pagination-icon:hover {
     background-color: #F4F7FE;
@@ -754,7 +760,7 @@ ul {
 }
 
 .details_box {
-    display: flex;
+   
     height: 91px;
     padding: 21px 0px 27px 22px;
     align-items: flex-start;
@@ -837,4 +843,14 @@ ul {
     color: #2B3674;
     right: 25px;
     top: 52px;
+}
+/* css for no employee message popup */
+.NoEmpFoundPopupModal
+{
+    display:none;
+}
+/* endof no employee ppup modal */
+
+.hidden{
+    display: none !important;
 }

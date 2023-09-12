@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="html" href="viewemployee.html">
-    <script src="Country+State+District-City-Data.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -67,7 +66,7 @@
 
                     <!-- search bar -->
                     <div class="searchbar">
-                        <input type="text" class="" placeholder="search... &#128270">
+                        <input type="text" class="" placeholder="search... &#128270" id="searchElements" onkeyup="searchEmployee()">
                         <button class="notificationbtn"><i
                                 class="material-symbols-outlined bell">notifications</i></button>
                         <img class="searchbar-profile-img" src="assets/dp1.png">
@@ -162,56 +161,22 @@
                         </thead>
 
                         <tbody class="tbody" id="employeetablebody">
-                            <!-- table items -->
 
-                            <!-- <tr class="emp-column">
-                                <td>#01</td>
-                                <td> <img class="profile-img" src="assets/dp2.png"> Michael Johnson</td>
-                                <td>michaeljohnson@example.com</td>
-                                <td>5551234567</td>
-                                <td>Male</td>
-                                <td>10 December 1985</td>
-                                <td>USA</td>
-                                <td><button class="dot material-symbols-outlined" id="dot-menu">
-                                        more_horiz
-                                    </button> -->
-                            <!-- 3 dot dropdown menu -->
-                            <!-- <div class="dropdown-content" id="dropdown-content-menu">
-                                        <ul>
-                                            <li><button class="option-menu" id="viewprofile_emp"><span
-                                                        class="material-symbols-outlined icon">visibility</span> View
-                                                    Details</button></li>
-                                            <li><button class="option-menu" id="editprofile_emp"><span
-                                                        class="material-symbols-outlined icon">edit</span> Edit</button>
-                                            </li>
-                                            <li><button class="option-menu" id="deleteprofile_emp"><span
-                                                        class="material-symbols-outlined icon">delete</span>
-                                                    Delete</button></li>
-                                            <li><button class="option-menu-button" id="close-option-menu">Close</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                     end of 3 dot dropdown menu 
-                                </td>
-
-
-                            </tr> -->
                         </tbody>
                     </table>
                     <!-- end of table items -->
                 </div>
                 <!-- pagination -->
                 <div class="pagination">
-                    <button class="pagination-icon material-symbols-outlined">keyboard_double_arrow_left</button>
-                    <button class="pagination-icon material-symbols-outlined">navigate_before</button>
-                    <button class="pagination-icon">1</button>
-                    <button class="pagination-icon">2</button>
-                    <button class="pagination-icon">3</button>
-                    <button class="pagination-icon">...</button>
-                    <button class="pagination-icon">10</button>
-                    <button class="pagination-icon material-symbols-outlined">navigate_next</button>
-                    <button class="pagination-icon material-symbols-outlined">keyboard_double_arrow_right</button>
-                </div>
+                    <button class="pagination-icon material-symbols-outlined" id="pageleft">navigate_before</button>
+
+                        <div class="PageNumBtns" id="PageNumBtns">
+                            <!-- <button class="pagination-icon"id="pagenum"></button> -->
+                        </div>
+
+                    <button class="pagination-icon material-symbols-outlined" id="pageright">navigate_next</button>
+
+                   </div>
                 <!-- end of pagination -->
                 <!-- <hr style=" color: 1px solid #D3D8E2;padding-bottom: 10px;"> -->
                 <footer class="terms-and-condition">
@@ -227,7 +192,7 @@
 
         <!-- add employee form -->
 
-        <div class="employee-form" id="emp-form" >
+        <div class="employee-form" id="emp-form">
 
             <div class="form-contents">
                 <div class="custom-form">
@@ -238,11 +203,13 @@
                                     close
                                 </i></button>
                         </div>
-                        <div class="upload">
+                        <div class="upload" id="uploadBtn">
                             <img src="assets/upload.png" alt="">
                             <p style="color:#4318FF">Upload image</p>
                             <div class="formattext">PNG, JPG files are allowed</div>
+                            <input type="file" style="display: none;" id="fileInput">
                         </div>
+                        
                         <!-- first input row -->
                         <div class="row">
                             <div class="form-group col-2 ">
@@ -253,21 +220,24 @@
                                     <option>Mr.</option>
                                     <option>Mrs.</option>
                                 </select>
-                                <label for="errormessage" class="errormessage" id="errormessageSalutation">Select one</label>
+                                <label for="errormessage" class="errormessage" id="errormessageSalutation">Select
+                                    one</label>
 
-                            
+
                             </div>
                             <div class="form-group col-5">
                                 <label for="firstName" class="required mb-3 textbox_head">First Name</label>
                                 <input type="text" class="input_box form-control rounded-4 mb-1" id="firstName"
                                     name="firstName" placeholder="Enter your first name">
-                                    <label for="errormessage" class="errormessage" id="errormessageFirstname">Please Enter the First Name</label>
+                                <label for="errormessage" class="errormessage" id="errormessageFirstname">Please Enter
+                                    the First Name</label>
                             </div>
                             <div class="form-group col-5">
                                 <label for="lastName" class="required mb-3 textbox_head">Last Name</label>
                                 <input type="text" class="input_box form-control rounded-4 mb-1" id="lastName"
                                     name="lastName" placeholder="Enter your last name">
-                                    <label for="errormessage" class="errormessage" id="errormessageLastname">Please Enter the Last Name</label>
+                                <label for="errormessage" class="errormessage" id="errormessageLastname">Please Enter
+                                    the Last Name</label>
                             </div>
                         </div>
                         <!-- end of first input row -->
@@ -278,14 +248,16 @@
                                 <label for="email" class="required mb-3 textbox_head">Email</label>
                                 <input type="email" class="input_box form-control rounded-4 mb-1" id="email"
                                     name="email" placeholder="mail@simmmple.com">
-                                    <label for="errormessage" class="errormessage" id="errormessageEmail">Please Enter the Email</label>
+                                <label for="errormessage" class="errormessage" id="errormessageEmail">Please Enter the
+                                    Email</label>
 
                             </div>
                             <div class="form-group col-6">
                                 <label for="number" class="required mb-3 textbox_head">Mobile Number</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-1" id="phone"
-                                    name="phone" placeholder="enter mobile number" >
-                                    <label for="errormessage" class="errormessage" id="errormessagePhone">Please Enter the Mobile Number</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-1" id="phone" name="phone"
+                                    placeholder="enter mobile number">
+                                <label for="errormessage" class="errormessage" id="errormessagePhone">Please Enter the
+                                    Mobile Number</label>
 
                             </div>
                         </div>
@@ -295,8 +267,10 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="date" class="required textbox_head mb-3">Date of Birth</label>
-                                <input type="date" class="input_box form-control rounded-4 mb-1" id="dateofbirth" name="date">
-                                <label for="errormessage" class="errormessage"  id="errormessageDob">Please Select date of birth</label>
+                                <input type="date" class="input_box form-control rounded-4 mb-1" id="dateofbirth"
+                                    name="date">
+                                <label for="errormessage" class="errormessage" id="errormessageDob">Please Select date
+                                    of birth</label>
 
                             </div>
                             <div class="form-group col-6">
@@ -304,14 +278,15 @@
                                 <div class="form-check mt-4 ">
                                     <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
 
-                                    <label class="form-check-label textbox_head" for="male" >Male</label>
+                                    <label class="form-check-label textbox_head" for="male">Male</label>
 
                                     <label class="form-check-label textbox_head" for="Female">
                                         <input class="form-check-input ms-2 me-2 " type="radio" name="gender"
-                                            id="Female" value="Female">Female
+                                            id="female" value="Female">Female
                                     </label>
                                 </div>
-                                <label for="errormessage" class="errormessage mt-4"  id="errormessageGender">Please select the gender</label>
+                                <label for="errormessage" class="errormessage mt-4" id="errormessageGender">Please
+                                    select the gender</label>
                             </div>
                         </div>
                         <!-- end of third input row -->
@@ -322,7 +297,8 @@
                                 <label for="Address" class="required mb-1 textbox_head mb-3">Address</label>
                                 <input type="text" class="input_box form-control rounded-4 mb-1" id="Address"
                                     name="Address" placeholder="enter address">
-                                    <label for="errormessage" class="errormessage "  id="errormessageAddress">Please Enter the Address</label>
+                                <label for="errormessage" class="errormessage " id="errormessageAddress">Please Enter
+                                    the Address</label>
 
                             </div>
                         </div>
@@ -333,7 +309,8 @@
                                 <label for="Address" class="required mb-1 textbox_head mb-3">Qualifications</label>
                                 <input type="text" class="input_box form-control rounded-4 mb-1" id="qualification"
                                     name="Address" placeholder=" Enter Qualifications">
-                                    <label for="errormessage" class="errormessage " id="errormessageQualifications">Please Enter the Qualifications</label>
+                                <label for="errormessage" class="errormessage " id="errormessageQualifications">Please
+                                    Enter the Qualifications</label>
 
                             </div>
                         </div>
@@ -343,19 +320,62 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="country" class="required textbox_head mb-3">Country</label>
-                                <select class="input_box form-control form-select rounded-4 mb-1" id="countySel" 
+                                <select class="input_box form-control form-select rounded-4 mb-1" id="country"
                                     name="country">
-                                    <option>Select a country</option>
+
+                                    <option></option>
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>France</option>
+                                    <option>India</option>
+                                    <option>Brazil</option>
+                                    <option>Australia</option>
+                                    <option>Canada</option>
+
                                 </select>
-                                <label for="errormessage" class="errormessage " id="errormessageCountry">Please Select a country</label>
+                                <label for="errormessage" class="errormessage " id="errormessageCountry">Please Select a
+                                    country</label>
 
                             </div>
                             <div class="form-group col-6">
                                 <label for="state" class="required textbox_head mb-3">State</label>
-                                <select class="input_box form-control form-select rounded-4 mb-1" id="stateSel" name="state">
-                                    <option>Select a state</option>
+                                <select class="input_box form-control form-select rounded-4 mb-1" id="state"
+                                    name="state">
+                                    <option></option>
+                                    <option>New York City</option>
+                                    <option>Los Angeles</option>
+                                    <option>Chicago</option>
+                                    <option>Washington, D.C.</option>
+                                    <option>San Francisco</option>
+                                    <option>London</option>
+                                    <option>Manchester</option>
+                                    <option>Birmingham</option>
+                                    <option>Edinburgh</option>
+                                    <option>Liverpool</option>
+                                    <option>London</option>
+                                    <option>Manchester</option>
+                                    <option>Birmingham</option>
+                                    <option>Edinburgh</option>
+                                    <option>Liverpool</option>
+                                    <option>Berlin</option>
+                                    <option>Munich</option>
+                                    <option>Hamburg</option>
+                                    <option>Frankfurt</option>
+                                    <option>Cologne</option>
+                                    <option>New Delhi</option>
+                                    <option>Mumbai</option>
+                                    <option>Bangalore</option>
+                                    <option>Kolkata</option>
+                                    <option>Chennai</option>
+                                    <option>Sydney</option>
+                                    <option>Melbourne</option>
+                                    <option>Brisbane</option>
+                                    <option>Perth</option>
+                                    <option>Adelaide</option>
+
                                 </select>
-                                <label for="errormessage" class="errormessage " id="errormessageState">Please Select a state</label>
+                                <label for="errormessage" class="errormessage " id="errormessageState">Please Select a
+                                    state</label>
 
                             </div>
                         </div>
@@ -365,40 +385,67 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="city" class="required textbox_head mb-3">City</label>
-                                <select class="input_box form-control form-select rounded-4 mb-1" id="districtSel" name="city">
-                                    <option>Select a city</option>
+                                <select class="input_box form-control form-select rounded-4 mb-1" id="city"
+                                    name="city">
+                                    <option></option>
+                                    <option>New Delhi</option>
+                                    <option>Delhi Cantt</option>
+                                    <option>South Delhi</option>
+                                    <option>North Delhi</option>
+                                    <option>East Delhi</option>
+                                    <option>Mumbai</option>
+                                    <option>Mumbai Suburban</option>
+                                    <option>Thane</option>
+                                    <option>Navi Mumbai</option>
+                                    <option>Kalyan</option>
+                                    <option>Bangalore</option>
+                                    <option>Electronic City</option>
+                                    <option>Whitefield</option>
+                                    <option>Jayanagar</option>
+                                    <option>Indiranagar</option>
+                                    <option>Chennai</option>
+                                    <option>Anna Nagar</option>
+                                    <option>T. Nagar</option>
+                                    <option>Velachery</option>
+                                    <option>Adyar</option>
+
                                 </select>
-                                <label for="errormessage" class="errormessage " id="errormessageCity">Please Select a city</label>
+                                <label for="errormessage" class="errormessage " id="errormessageCity">Please Select a
+                                    city</label>
 
                             </div>
                             <div class="form-group col-6">
                                 <label for="pincode" class="required textbox_head mb-3">Pin/Zip</label>
-                                <input type="text" class="input_box form-control  rounded-4 mb-1" id="pincode" name="pincode"
-                                    placeholder="enter Pin/Zip">
-                                    <label for="errormessage" class="errormessage "  id="errormessagePin">Please Enter the pincode</label>
+                                <input type="text" class="input_box form-control  rounded-4 mb-1" id="pincode"
+                                    name="pincode" placeholder="enter Pin/Zip">
+                                <label for="errormessage" class="errormessage " id="errormessagePin">Please Enter the
+                                    pincode</label>
 
                             </div>
                         </div>
                         <!-- end of sixth row -->
 
                         <!-- userid and password -->
-                          <!-- sixth row -->
-                          <div class="row">
+                        <!-- sixth row -->
+                        <div class="row">
                             <div class="form-group col-6">
                                 <label for="city" class="required textbox_head mb-3">User Name</label>
                                 <input type="text" class="input_box form-control  rounded-4 mb-1" id="user_name"
-                                placeholder="Enter user name">
-                                <label for="errormessage" class="errormessage " id="errormessageUsrname">Please Enter username</label>
+                                    placeholder="Enter user name">
+                                <label for="errormessage" class="errormessage " id="errormessageUsrname">Please Enter
+                                    username</label>
 
                             </div>
                             <div class="form-group col-6  password">
                                 <label for="password" class="required textbox_head mb-3">Password</label>
                                 <div class="password-input-wrapper">
-                                    <input type="password" class="input_box form-control rounded-4 mb-1" id="password" name="password"
-                                        placeholder="Enter Password">
-                                    <i class="material-symbols-outlined toggle-password" id="togglePassword">visibility</i>
+                                    <input type="password" class="input_box form-control rounded-4 mb-1" id="password"
+                                        name="password" placeholder="Enter Password">
+                                    <i class="material-symbols-outlined toggle-password"
+                                        id="togglePassword">visibility</i>
                                 </div>
-                                    <label for="errormessage" class="errormessage " id="errormessagePass">Please Enter password</label>
+                                <label for="errormessage" class="errormessage " id="errormessagePass">Please Enter
+                                    password</label>
 
                             </div>
                         </div>
@@ -444,7 +491,7 @@
                         <div class="row">
                             <div class="form-group col-2 ">
                                 <label for="salutation" class="required mb-3 textbox_head">Salutation</label>
-                                <select class=" form-control form-select rounded-4 input_box mb-3" id="salutation"
+                                <select class=" form-control form-select rounded-4 input_box mb-3" id="Editsalutation"
                                     name="salutation">
                                     <option></option>
                                     <option>Mr.</option>
@@ -453,12 +500,12 @@
                             </div>
                             <div class="form-group col-5">
                                 <label for="firstName" class="required mb-3 textbox_head">First Name</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="firstName"
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="EditfirstName"
                                     name="firstName" placeholder="Enter your first name">
                             </div>
                             <div class="form-group col-5">
                                 <label for="lastName" class="required mb-3 textbox_head">Last Name</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="lastName"
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="EditlastName"
                                     name="lastName" placeholder="Enter your last name">
                             </div>
                         </div>
@@ -468,12 +515,12 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="email" class="required mb-3 textbox_head">Email</label>
-                                <input type="email" class="input_box form-control rounded-4 mb-3" id="email"
+                                <input type="email" class="input_box form-control rounded-4 mb-3" id="Editemail"
                                     name="email" placeholder="mail@simmmple.com">
                             </div>
                             <div class="form-group col-6">
                                 <label for="number" class="required mb-3 textbox_head">Mobile Number</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="number"
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="Editphone"
                                     name="number" placeholder="enter mobile number">
                             </div>
                         </div>
@@ -483,18 +530,18 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="date" class="required textbox_head mb-3">Date of Birth</label>
-                                <input type="date" class="input_box form-control rounded-4" id="date" name="date">
+                                <input type="date" class="input_box form-control rounded-4" id="Editdateofbirth"
+                                    name="date">
                             </div>
                             <div class="form-group col-6">
                                 <label for="gender" class="required  textbox_head">Gender</label>
                                 <div class="form-check mt-4">
-                                    <input class="form-check-input" type="radio" name="gender" id="male">
+                                    <input class="form-check-input" type="radio" name="gender" id="Editmale" value="male">
 
                                     <label class="form-check-label textbox_head" for="male">Male</label>
 
                                     <label class="form-check-label textbox_head" for="Female">
-                                        <input class="form-check-input ms-2 me-2 " type="radio" name="gender"
-                                            id="Female">Female
+                                        <input class="form-check-input ms-2 me-2 " type="radio" name="gender" id="EditFemale" value="Female">Female
                                     </label>
                                 </div>
                             </div>
@@ -505,25 +552,74 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="Address" class="required mb-1 textbox_head mb-3">Address</label>
-                                <input type="text" class="input_box form-control rounded-4 mb-3" id="Address"
+                                <input type="text" class="input_box form-control rounded-4 mb-3" id="EditAddress"
                                     name="Address" placeholder="enter address">
                             </div>
                         </div>
                         <!-- end of fourth row -->
+                        <!-- row for qualifcaations -->
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="Address" class="required mb-1 textbox_head mb-3">Qualifications</label>
+                                <input type="text" class="input_box form-control rounded-4 mb-1" id="Editqualification"
+                                    name="Address" placeholder=" Enter Qualifications">
+                                <label for="errormessage" class="errormessage " id="errormessageQualifications">Please
+                                    Enter the Qualifications</label>
 
+                            </div>
+                        </div>
                         <!-- fifth row -->
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="country" class="required textbox_head mb-3">Country</label>
-                                <select class="input_box form-control form-select rounded-4 mb-3" id="country"
+                                <select class="input_box form-control form-select rounded-4 mb-3" id="Editcountry"
                                     name="country">
-                                    <option>Select country</option>
+                                    <option></option>
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>France</option>
+                                    <option>India</option>
+                                    <option>Brazil</option>
+                                    <option>Australia</option>
+                                    <option>Canada</option>
                                 </select>
                             </div>
                             <div class="form-group col-6">
                                 <label for="state" class="required textbox_head mb-3">State</label>
-                                <select class="input_box form-control form-select rounded-4" id="state" name="state">
-                                    <option>Select state</option>
+                                <select class="input_box form-control form-select rounded-4" id="Editstate"
+                                    name="state">
+                                    <option></option>
+                                    <option></option>
+                                    <option>New York City</option>
+                                    <option>Los Angeles</option>
+                                    <option>Chicago</option>
+                                    <option>Washington, D.C.</option>
+                                    <option>San Francisco</option>
+                                    <option>London</option>
+                                    <option>Manchester</option>
+                                    <option>Birmingham</option>
+                                    <option>Edinburgh</option>
+                                    <option>Liverpool</option>
+                                    <option>London</option>
+                                    <option>Manchester</option>
+                                    <option>Birmingham</option>
+                                    <option>Edinburgh</option>
+                                    <option>Liverpool</option>
+                                    <option>Berlin</option>
+                                    <option>Munich</option>
+                                    <option>Hamburg</option>
+                                    <option>Frankfurt</option>
+                                    <option>Cologne</option>
+                                    <option>New Delhi</option>
+                                    <option>Mumbai</option>
+                                    <option>Bangalore</option>
+                                    <option>Kolkata</option>
+                                    <option>Chennai</option>
+                                    <option>Sydney</option>
+                                    <option>Melbourne</option>
+                                    <option>Brisbane</option>
+                                    <option>Perth</option>
+                                    <option>Adelaide</option>
                                 </select>
                             </div>
                         </div>
@@ -533,24 +629,68 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="city" class="required textbox_head mb-3">City</label>
-                                <select class="input_box form-control form-select rounded-4" id="city" name="city">
-                                    <option>Select city</option>
+                                <select class="input_box form-control form-select rounded-4" id="Editcity" name="city">
+                                    <option></option>
+                                    <option></option>
+                                    <option>New Delhi</option>
+                                    <option>Delhi Cantt</option>
+                                    <option>South Delhi</option>
+                                    <option>North Delhi</option>
+                                    <option>East Delhi</option>
+                                    <option>Mumbai</option>
+                                    <option>Mumbai Suburban</option>
+                                    <option>Thane</option>
+                                    <option>Navi Mumbai</option>
+                                    <option>Kalyan</option>
+                                    <option>Bangalore</option>
+                                    <option>Electronic City</option>
+                                    <option>Whitefield</option>
+                                    <option>Jayanagar</option>
+                                    <option>Indiranagar</option>
+                                    <option>Chennai</option>
+                                    <option>Anna Nagar</option>
+                                    <option>T. Nagar</option>
+                                    <option>Velachery</option>
+                                    <option>Adyar</option>
+
                                 </select>
                             </div>
                             <div class="form-group col-6">
                                 <label for="pincode" class="required textbox_head mb-3">Pin/Zip</label>
-                                <input type="text" class="input_box form-control  rounded-4" id="pincode" name="pincode"
-                                    placeholder="enter Pin/Zip">
+                                <input type="text" class="input_box form-control  rounded-4" id="Editpincode"
+                                    name="pincode" placeholder="enter Pin/Zip">
                             </div>
                         </div>
                         <!-- end of sixth row -->
+                        <!-- sixth row -->
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="city" class="required textbox_head mb-3">User Name</label>
+                                <input type="text" class="input_box form-control  rounded-4 mb-1" id="Edituser_name"
+                                    placeholder="Enter user name">
+                                <label for="errormessage" class="errormessage " id="errormessageUsrname">Please Enter
+                                    username</label>
 
+                            </div>
+                            <div class="form-group col-6  password">
+                                <label for="password" class="required textbox_head mb-3">Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="text" class="input_box form-control rounded-4 mb-1"
+                                        id="Editpassword" name="password" placeholder="Enter Password">
+                                    <i class="material-symbols-outlined toggle-password"
+                                        id="EdittogglePassword">visibility</i>
+                                </div>
+                                <label for="errormessage" class="errormessage " id="errormessagePass">Please Enter
+                                    password</label>
+
+                            </div>
+                        </div>
                         <!-- submit cancel buttoon -->
                         <div class=" row  ">
                             <div class="final_submit  mb-3  p-3 col bg-white rounded-3  ">
                                 <div class="contents_submit ">
                                     <button class="final_abort">Cancel</button>
-                                    <button class="submission">Save Changes</button>
+                                    <button class="submission" id="formupdate">Save Changes</button>
                                 </div>
                             </div>
                         </div>
@@ -581,13 +721,32 @@
                     </div>
                     <div class="modal-footer final_submit  mb-3  p-3 col  rounded-3">
                         <div class="contents_submit ">
-                            <button class="final_abort  ">Cancel</button>
-                            <button class="submission final_abort_modal">Delete</button>
+
+                            <button class="submission final_abort_modal" id="deleteEmployee">Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- modal for no employee found message -->
+        <div class="modal  NoEmpFoundPopupModal" id="NoEmpFoundPopupModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered rounded-4" role="document">
+                <div class="modal-content rounded-4">
+                  
+                    <div class="modal-body popupbody">
+                        Sorry! No employee found...
+                    </div>
+                    <div class="modal-footer final_submit  mb-3  p-3 col  rounded-3">
+                        <div class="contents_submit ">
+
+                            <button class="submission final_abort_modal" id="CloseEmpNotFoundBtn">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of no employee found message -->
 
         <!-- modal box for conformation popup -->
         <div class="modal  conformationpopup" id="conformationpopup" tabindex="-1" role="dialog"

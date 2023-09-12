@@ -1,4 +1,5 @@
 //function for clearing the form
+
 function clearForm() {
     document.getElementById("salutation").value = "";
     document.getElementById("firstName").value = "";
@@ -32,11 +33,27 @@ togglePassword.addEventListener('click', function () {
 });
 
 
+
 // js for 3 dot menu//
 function openMenu(empID) {
     const dropDownContent = document.getElementById("dropdown-content-menu");
-
+    dropDownContent.innerHTML = `
+        <ul>
+        <li><button class="option-menu" id="viewprofile_emp" onclick="openViewEmployeeDetails('${empID}')"><span
+                    class="material-symbols-outlined icon">visibility</span> View
+                Details</button></li>
+        <li><button class="option-menu" id="editprofile_emp" onclick="openEditEmployee('${empID}')"><span
+                class="material-symbols-outlined icon">edit</span> Edit</button>
+        </li>
+        <li><button class="option-menu" id="deleteprofile_emp" onclick= deleteDataFromAPI('${empID}')><span
+                class="material-symbols-outlined icon">delete</span>
+            Delete</button></li>
+        <li><button class="option-menu-button" id="close-option-menu" onclick=closeMenu()>Close</button>
+        </li>
+        </ul>
+    `;
     dropDownContent.style.display = "block";
+
 }
 // end of 3 dot menu view//
 
@@ -49,19 +66,6 @@ function closeMenu() {
 
 //end of closing 3dot menu
 
-
-// js for edit employee//
-document.addEventListener("DOMContentLoaded", function () {
-    const editDetailsLink = document.getElementById("editprofile_emp");
-    const editEmpForm = document.getElementById("edit-emp-form");
-    const overlay = document.getElementById("overlay");
-
-    editDetailsLink.addEventListener("click", function () {
-        editEmpForm.style.display = "block";
-        overlay.style.display = "block";
-
-    });
-});
 
 // js for closing buttonn in edit employee form
 document.addEventListener("DOMContentLoaded", function () {
@@ -78,28 +82,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-// js for view details button in 3dot list menu//
-document.addEventListener("DOMContentLoaded", function () {
-    const viewEmpProfile = document.getElementById("viewprofile_emp");
-
-    viewEmpProfile.addEventListener("click", function () {
-        window.location.href = "viewemployee.html";
-    });
-});
-
 // for fetching the data from API 
 //Adding employee  functionalities starts here
+let data = [];
 
 readEmployee();
-async function readEmployee() {
+async function readEmployee(data) {
     let temp = '';
     await fetch('http://localhost:3000/employees')
         .then(function (res) {
             return res.json();
-        }).then(function (data) {
+        }).then(function (responseData) { // Use a different variable name to avoid conflicts
+            data = responseData; // Assign the response data to the data variable
             console.log(data);
-            for (var i = 0; i < data.length; i++) {
+
+            const maxCountOnPage = 5;//its the number if data to be displayed on the page
+            const totalPages = Math.ceil(data.length / maxCountOnPage);//finding the total pages as per the data
+            pagination(totalPages);//returning the value to pagination function
+const start = maxCountOnPage*(CurrentPage-1);
+const end = Math.min(maxCountOnPage*CurrentPage,data.length);
+            for (var i = start; i < end; i++) {
                 const employee = data[i];
 
                 temp += `<tr class="emp-column">
@@ -110,24 +112,13 @@ async function readEmployee() {
                 <td>${employee.gender}</td>
                 <td>${employee.dob}</td>
                 <td>${employee.country}</td>
-                <td><button class="dot material-symbols-outlined" id="dot-menu" onclick=openMenu('${employee.id}')>
+                <td>
+                <button class="dot material-symbols-outlined" id="dot-menu" onclick=openMenu('${employee.id}')>
                         more_horiz
                     </button>
                     <!-- 3 dot dropdown menu -->
                     <div class="dropdown-content" id="dropdown-content-menu">
-                    <ul>
-                    <li><button class="option-menu" id="viewprofile_emp"><span
-                                class="material-symbols-outlined icon">visibility</span> View
-                            Details</button></li>
-                    <li><button class="option-menu" id="editprofile_emp"><span
-                                class="material-symbols-outlined icon">edit</span> Edit</button>
-                    </li>
-                    <li><button class="option-menu" id="deleteprofile_emp" onclick= deleteDataFromAPI('${employee.id}')><span
-                                class="material-symbols-outlined icon">delete</span>
-                            Delete</button></li>
-                    <li><button class="option-menu-button" id="close-option-menu" onclick=closeMenu()>Close</button>
-                    </li>
-                </ul>
+                   
                     </div>
                     <!-- end of 3 dot dropdown menu -->
                 </td>
@@ -140,6 +131,49 @@ async function readEmployee() {
 
 }
 // end of fetch data from API
+
+// function for search the element from table
+function searchEmployee() {
+    const NoEmpPopup = document.getElementById("NoEmpFoundPopupModal");
+    const overlay = document.getElementById("overlay");
+    let input = document.getElementById("searchElements").value;
+    input = input.toLowerCase();
+    let tag = document.getElementsByTagName("tr");
+    let foundEmployee = false; // Variable to track if any employees are found
+
+    for (let i = 0; i < tag.length; i++) {
+        console.log(tag.length);
+        if (!tag[i].innerHTML.toLowerCase().includes(input)) {
+            tag[i].style.display = "none";
+        } else {
+            tag[i].style.display = "table-row";
+            foundEmployee = true; // Set to true if at least one employee is found
+        }
+    }
+
+    // Display the modal only if no employees are found
+    if (!foundEmployee) {
+        NoEmpPopup.style.display = "block";//
+        overlay.style.display = "block";
+    } else {
+        NoEmpPopup.style.display = "none"; // Hide the modal if employees are found
+    }
+}
+//function for closing button in no employee popup 
+const NoEmpPopup = document.getElementById("NoEmpFoundPopupModal");
+const CloseEmpBtn = document.getElementById("CloseEmpNotFoundBtn");
+const Closeoverlay = document.getElementById("overlay");
+
+CloseEmpBtn.addEventListener("click", function () {
+    NoEmpPopup.style.display = "none";
+    Closeoverlay.style.display = "none";
+    readEmployee();//refresh the page
+})
+
+//end of popup
+
+
+//end of search employee
 
 //js for creating and submitting new user/employee
 
@@ -172,9 +206,9 @@ empForm_fetch.addEventListener('click', function (e) {
     //const gender = document.querySelector('input[name="gender"]:checked').value
 
     const address = document.getElementById('Address').value;
-    const country = document.getElementById('countySel').value;
-    const state = document.getElementById('stateSel').value;
-    const city = document.getElementById('districtSel').value;
+    const country = document.getElementById('country').value;
+    const state = document.getElementById('state').value;
+    const city = document.getElementById('city').value;
     const pincode = document.getElementById('pincode').value;
     const qualifications = document.getElementById('qualification').value;
     const username = document.getElementById("user_name").value;
@@ -222,10 +256,11 @@ empForm_fetch.addEventListener('click', function (e) {
             .then(data => {
                 console.log('Employee added:', data);
 
-
                 FormValidationSuccessPopup();
-                clearForm();//for clearing the forms
+                clearForm();
                 readEmployee();
+
+
 
             })
             .catch(error => {
@@ -244,9 +279,9 @@ function FormValidation() {
     const phone = document.getElementById("phone").value;
     const dob = document.getElementById("dateofbirth").value;
     const address = document.getElementById('Address').value;
-    const country = document.getElementById('countySel').value;
-    const state = document.getElementById('stateSel').value;
-    const city = document.getElementById('districtSel').value;
+    const country = document.getElementById('country').value;
+    const state = document.getElementById('state').value;
+    const city = document.getElementById('city').value;
     const pincode = document.getElementById('pincode').value;
     const qualifications = document.getElementById('qualification').value;
     const username = document.getElementById("user_name").value;
@@ -278,7 +313,7 @@ function FormValidation() {
         hasError = false;
     }
     else {
-        errorMessageSalutation.style.visibility = 'hidden'
+        errorMessageSalutation.style.display = 'none'
     }
 
     // first name
@@ -428,13 +463,13 @@ function FormValidation() {
 // code for popup in add employee button
 function FormValidationSuccessPopup() {
     if (FormValidation()) {
-       
+
         const ConformationPopup = document.getElementById("conformationpopup");
         const employeeForm = document.getElementById("emp-form");
 
-            ConformationPopup.style.display = "block";
-            employeeForm.style.display = "none";
-        
+        ConformationPopup.style.display = "block";
+        employeeForm.style.display = "none";
+
     }
 }
 
@@ -457,6 +492,7 @@ const close_addempfrmbtn = document.getElementById("close_addempfrmbtn");
 close_addempfrmbtn.addEventListener("click", function () {
     employeeForm.style.display = "none";
     overlay.style.display = "none";
+    clearForm();
 })
 // end
 
@@ -476,7 +512,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //end of adding employee code//
 
 
-// working of this code: when the closing icon is clicked the form will be closed form the main screen//
+// working of this code: when the closing icon is clicked the add  form will be closed form the main screen//
 document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.getElementById("close_id");
     const employeeForm = document.getElementById("emp-form");
@@ -491,56 +527,251 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // function for deleting the employee from the api and also from the api
-function deleteDataFromAPI(id) {
-    console.log(id)
+function deleteDataFromAPI(empid) {
+    $("#deletePopupModal").modal("show");
+    overlay.style.display = "block";
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("deleteprofile_emp").addEventListener("click", function () {
-            $("#deletePopupModal").modal("show");
-            overlay.style.display = "block";
+    console.log(empid)
+
+    const deleteEmp = document.getElementById("deleteEmployee");
+    deleteEmp.addEventListener("click", function () {
+        fetch(`http://localhost:3000/employees/${empid}`, {
+            method: 'DELETE',
+
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                console.log('Data deleted successfully:', data);
+                readEmployee();
+            })
+    })
+
+
+        .catch(error => {
+            console.error('Error deleting data:', error);
         });
-    });
-    fetch(`http://localhost:3000/employees/${id}` , {
-        method: 'DELETE',
-})
 
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        readEmployee();
-        console.log('Data deleted successfully:', data);
-    })
-    .catch(error => {
-        console.error('Error deleting data:', error);
-    });
-   
 }
 
 
-// js for modal popup for delete 
-
-
-//end of js for mmodal popup delete
-
 //js for closing modal popupp delete
+
 document.addEventListener("DOMContentLoaded", function () {
-    const closeButtonmodal = document.getElementById("close_modal_delete");
+    const deleteButtonmodal = document.getElementById("deleteEmployee");
     const deleteModalPopupMessage = document.getElementById("deletePopupModal");
     const overlay = document.getElementById("overlay");
 
-    closeButtonmodal.addEventListener("click", function () {
+    deleteButtonmodal.addEventListener("click", function () {
         deleteModalPopupMessage.style.display = "none";
         overlay.style.display = "none";
 
+    });
+
+})
+
+//opening delete modal
+function openDeletepopup() {
+    document.getElementById("deleteprofile_emp").addEventListener("click", function () {
+        $("#deletePopupModal").modal("show");
+        overlay.style.display = "block";
+    });
+
+}
+
+//function for opening the view employee page
+
+function openViewEmployeeDetails(empid) {
+
+    const viewEmpProfile = document.getElementById("viewprofile_emp");
+
+    viewEmpProfile.addEventListener("click", function () {
+        window.location.href = `viewemployee.html?id=${empid}`;
 
 
     });
+}
+//end of view employee details
+//js for modal closing in delete employee
+const modalDelete = document.getElementById("close_modal_delete");
+const deletePopupModal = document.getElementById("deletePopupModal");
+const Overlay = document.getElementById("overlay");
+
+modalDelete.addEventListener("click", function () {
+    Overlay.style.display = "none";
+    deletePopupModal.style.display = "none";
+})
+
+//end of modal delte close
+// function for appeaaring edit employee
+function openEditEmployee(empid) {
+    const openEditEmployeeForm = document.getElementById("edit-emp-form");
+    const overlay = document.getElementById("overlay");
+
+    openEditEmployeeForm.style.display = "block";
+    overlay.style.display = "block";
+
+    console.log("before fetch in edit");
+
+    fetch(`http://localhost:3000/employees/${empid}`)
+        .then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            console.log(data);
+
+            document.getElementById("Editsalutation").value = data.salutation;
+            document.getElementById("EditfirstName").value = data.firstName;
+            document.getElementById("EditlastName").value = data.lastName;
+            document.getElementById("Editemail").value = data.email;
+            document.getElementById("Editphone").value = data.phone;
+            document.getElementById("Editdateofbirth").value = changeformat(data.dob);
+
+            function changeformat(val) {
+                const Array = val.split('-');
+                let day = Array[2];
+                let month = Array[1];
+                let year = Array[0];
+                let formatteddate = day + "-" + month + "-" + year;
+                return formatteddate;
+            }
+
+            document.getElementById("EditAddress").value = data.address;
+            document.getElementById("Editcountry").value = data.country;
+            document.getElementById("Editstate").value = data.state;
+            document.getElementById("Editcity").value = data.city;
+            document.getElementById("Editpincode").value = data.pincode;
+            document.getElementById("Edituser_name").value = data.username;
+            document.getElementById("Editpassword").value = data.password;
+            document.getElementById("Editqualification").value = data.qualifications;
+            document.querySelector(".gender").value = data.gender;
+
+            var empupdate = document.getElementById('formupdate');
+            empupdate.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                let editdateformat = document.getElementById("Editdateofbirth").value;
+                console.log(editdateformat);
+                let editdate = changeformat(editdateformat);
+
+                const updatedEmployeeData = {
+                    salutation: document.getElementById("Editsalutation").value,
+                    firstName: document.getElementById("EditfirstName").value,
+                    lastName: document.getElementById("EditlastName").value,
+                    email: document.getElementById("Editemail").value,
+                    phone: document.getElementById("Editphone").value,
+                    dob: editdate,
+                    country: document.getElementById("Editcountry").value,
+                    state: document.getElementById("Editstate").value,
+                    address: document.getElementById("EditAddress").value,
+                    city: document.getElementById("Editcity").value,
+                    pincode: document.getElementById("Editpincode").value,
+                    qualifications: document.getElementById("Editqualification").value,
+                    username: document.getElementById("Edituser_name").value,
+                    password: document.getElementById("Editpassword").value,
+                    gender: document.querySelector('input[name="gender"]:checked').value
+                };
+                console.log(updatedEmployeeData);
+
+                // Use await to wait for the fetch request to complete
+                await fetch(`http://localhost:3000/employees/${empid}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedEmployeeData),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        readEmployee();
+                        function close_editform() {
+                            openEditEmployeeForm.style.display = "none";
+                            overlay.style.display = "none";
+                        }
+                        close_editform(); // Call the function to close the form
+                    })
+            });
+        });
+}
+
+
+
+
+//image uploading
+document.getElementById('uploadBtn').addEventListener('click', function () {
+
+    document.getElementById('fileInput').click(); // Trigger a click event on the hidden file input element
 });
 
+// document.getElementById('fileInput').addEventListener('change', function () {
+
+//     const selectedFile = this.files[0];
+//     if (selectedFile) {
+//         // You can add code here to handle the selected file, such as uploading it to a server or displaying it on the page.
+//         console.log('Selected file:', selectedFile.name);
+//     }
+// });
 
 
+// pagination 
 
+var CurrentPage=1;
+
+function pagination(totalPages) {
+    console.log(totalPages);
+    var pgnum = document.getElementById("PageNumBtns"); // div element where the pagination buttons are displayed
+    let temp = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        temp += `<button id="page${i}">${i}</button>`;
+    }
+
+    pgnum.innerHTML = temp;
+
+    pgnum.addEventListener('click', function (e) {
+        if (e.target.tagName === 'BUTTON') {
+            const pageNumber = parseInt(e.target.textContent);
+            if (!isNaN(pageNumber)) {
+                CurrentPage = pageNumber;
+                readEmployee();
+            }
+        }
+    });
+
+    var pageLeftButton = document.getElementById("pageleft");
+    var pageRightButton = document.getElementById("pageright");
+
+    // Use CSS to control button visibility
+    if (CurrentPage === 1) {
+        pageLeftButton.classList.add('hidden');
+    } else {
+        pageLeftButton.classList.remove('hidden');
+    }
+
+    if (CurrentPage === totalPages) {
+        pageRightButton.classList.add('hidden');    
+    } else {
+        pageRightButton.classList.remove('hidden');
+    }
+
+    pageLeftButton.addEventListener("click", function () {
+        if (CurrentPage > 1) {
+            CurrentPage--;
+            readEmployee();
+        }
+    });
+
+    pageRightButton.addEventListener("click", function () {
+        if (CurrentPage < totalPages) {
+            CurrentPage++;
+            readEmployee();
+        }
+    });
+}
+
+//end of pagination
