@@ -16,6 +16,7 @@ function clearForm() {
     document.getElementById("password").value = "";
     document.getElementById("dateofbirth").value = "";
     document.getElementById('Address').value = "";
+    
 }
 
 // for password visibility
@@ -106,7 +107,7 @@ async function readEmployee(data) {
 
                 temp += `<tr class="emp-column">
                 <td>${(i + 1)}</td>
-                <td> <img class="profile-img" src="E:/dummy api/dummy-employee-api/public/avatars/${employee.avatar}">${employee.firstName + " " + employee.lastName}</td>
+                <td> <img class="profile-img" src='http://localhost:3000/employees/${employee.id}/avatar'>${employee.firstName + " " + employee.lastName}</td>
                 <td>${employee.email}</td>
                 <td>${employee.phone}</td>
                 <td>${employee.gender}</td>
@@ -543,6 +544,14 @@ function deleteDataFromAPI(empid) {
             .then(data => {
 
                 console.log('Data deleted successfully:', data);
+
+                function openSucessdeleteModal(){
+                    const openSucessdeleteModal=document.getElementById("DeleteSucesspopup");
+                    const Openoverlay=document.getElementById("overlay");
+                    openSucessdeleteModal.style.display="block";
+                    Openoverlay.style.display="block";
+                }
+                openSucessdeleteModal();
                 readEmployee();
 
             })
@@ -594,8 +603,8 @@ function openViewEmployeeDetails(empid) {
 }
 //end of view employee details
 //js for modal closing in delete employee
-const modalDelete = document.getElementById("close_modal_delete");
-const deletePopupModal = document.getElementById("deletePopupModal");
+const modalDelete = document.getElementById("close_modal_delete_sucess");
+const deletePopupModal = document.getElementById("DeleteSucesspopup");
 const Overlay = document.getElementById("overlay");
 
 modalDelete.addEventListener("click", function () {
@@ -765,9 +774,10 @@ function uploadImage() {
     let imgLink = URL.createObjectURL(inputFile.files[0]);//creating url for image
     const imgTAG = document.createElement('img');
     imgTAG.src = imgLink;
-    imgView.textContent = "";//removing the image one the employee is added
+    imgView.textContent = " ";//removing the image one the employee is added
     imgView.appendChild(imgTAG);
     imgView.style.border = 0;
-    imgView.style.width = '200px'
+    imgView.style.width = '200px';
+
 }
 //end of image uploading

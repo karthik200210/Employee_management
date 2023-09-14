@@ -23,7 +23,7 @@ function detailsEmployee(empid) {
              </div> 
          <!-- dp view -->
          <div class="profile_pic" id="profile_pic">
-         <img class="profile-img" src="E:/dummy api/dummy-employee-api/public/avatars/${employee.id}.jpg">
+         <img class="profile-img" src="http://localhost:3000/employees/${employee.id}/avatar">
              </div>
              <div class="col ">
                  <div class=" user_name_row row-10 mt-lg-5  "id="user_name_row">

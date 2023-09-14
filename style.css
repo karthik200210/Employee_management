@@ -737,7 +737,7 @@ ul {
     align-items: center;
     width: 0 !important;
     justify-content: center;
-    top: 230px;
+    top: 260px;
 
 
 }
@@ -745,7 +745,8 @@ ul {
 .profile_pic img {
     border-radius: 100%;
     border: 4px solid white;
-    height: 120px;
+    height: 100px;
+    width:100px;
 
 }
 
@@ -872,6 +873,7 @@ ul {
 td img{
     width: 30px;
     height: 30px;
+    border-radius: 100%;
 }
 .upload-icon{
     width:20px !important;
