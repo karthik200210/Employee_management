@@ -203,11 +203,18 @@
                                     close
                                 </i></button>
                         </div>
-                        <div class="upload" id="uploadBtn">
-                            <img src="assets/upload.png" alt="">
-                            <p style="color:#4318FF">Upload image</p>
-                            <div class="formattext">PNG, JPG files are allowed</div>
-                            <input type="file" style="display: none;" id="fileInput">
+                       
+                        <div class="row upload-section">
+                        <label for="input-file" id="drop-area">
+                            <div class="col-md-12">
+                            <input type="file" accept="image/*" id="input-file" class="upload_image" hidden>
+                            <div class="upload align-items-center py-3 rounded-4" id="img-view">
+                                <img src="assets/upload.png"class="upload-icon" alt="">
+                                <p style="color:#4318FF" >Upload image</p>
+                                <div class="formattext">PNG, JPG files are allowed</div>
+                            </div>
+                            </div>
+                        </label>
                         </div>
                         
                         <!-- first input row -->

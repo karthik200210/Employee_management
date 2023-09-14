@@ -337,7 +337,7 @@
 }
 
 .pagination button {
-    background-color: #FFF;
+    background-color: #FFF;    
     border: transparent;
     border-radius: 8px;
     border: transparent;
@@ -347,6 +347,7 @@
     justify-content: space-between;
     color: #4318FF;
 }
+/* the buttons in the pagination will affect this css style dynamically */
 .PageNumBtns{
     display: flex;
     align-items: center;
@@ -354,7 +355,7 @@
 }
 
 
-.pagination-icon:hover {
+.pagination-icon :hover {
     background-color: #F4F7FE;
 }
 
@@ -671,6 +672,9 @@ ul {
     text-align: center;
 
 }
+.view-img-section_add_emp{
+    display: none;
+}
 
 /* css for employee view page */
 .view_page_maincontent {
@@ -735,11 +739,13 @@ ul {
     justify-content: center;
     top: 230px;
 
+
 }
 
 .profile_pic img {
     border-radius: 100%;
     border: 4px solid white;
+    height: 120px;
 
 }
 
@@ -853,4 +859,20 @@ ul {
 
 .hidden{
     display: none !important;
+}
+/* .upload_image{
+    width: 100%;
+} */
+.upload_image img{
+    width: 100%;
+}
+.upload-section img{
+    width: 100%;
+}
+td img{
+    width: 30px;
+    height: 30px;
+}
+.upload-icon{
+    width:20px !important;
 }

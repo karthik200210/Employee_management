@@ -99,14 +99,14 @@ async function readEmployee(data) {
             const maxCountOnPage = 5;//its the number if data to be displayed on the page
             const totalPages = Math.ceil(data.length / maxCountOnPage);//finding the total pages as per the data
             pagination(totalPages);//returning the value to pagination function
-const start = maxCountOnPage*(CurrentPage-1);
-const end = Math.min(maxCountOnPage*CurrentPage,data.length);
+            const start = maxCountOnPage * (CurrentPage - 1);
+            const end = Math.min(maxCountOnPage * CurrentPage, data.length);
             for (var i = start; i < end; i++) {
                 const employee = data[i];
 
                 temp += `<tr class="emp-column">
                 <td>${(i + 1)}</td>
-                <td> <img class="profile-img" src="assets/dp2.png">${employee.firstName + " " + employee.lastName}</td>
+                <td> <img class="profile-img" src="E:/dummy api/dummy-employee-api/public/avatars/${employee.avatar}">${employee.firstName + " " + employee.lastName}</td>
                 <td>${employee.email}</td>
                 <td>${employee.phone}</td>
                 <td>${employee.gender}</td>
@@ -176,7 +176,6 @@ CloseEmpBtn.addEventListener("click", function () {
 //end of search employee
 
 //js for creating and submitting new user/employee
-
 const empForm_fetch = document.getElementById('addNewEmp');
 empForm_fetch.addEventListener('click', function (e) {
     e.preventDefault();
@@ -188,10 +187,8 @@ empForm_fetch.addEventListener('click', function (e) {
     const phone = document.getElementById("phone").value;
     const dob = document.getElementById("dateofbirth").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
-    console.log(gender);
 
-    //function for converting the format of date from yyyy-mm-dd to dd-mm-yyyy
-
+    // Function for converting the format of date from yyyy-mm-dd to dd-mm-yyyy
     var dateofbirth = changeformat(dob);
 
     function changeformat(val) {
@@ -203,8 +200,6 @@ empForm_fetch.addEventListener('click', function (e) {
         return formatteddate;
     }
 
-    //const gender = document.querySelector('input[name="gender"]:checked').value
-
     const address = document.getElementById('Address').value;
     const country = document.getElementById('country').value;
     const state = document.getElementById('state').value;
@@ -214,9 +209,7 @@ empForm_fetch.addEventListener('click', function (e) {
     const username = document.getElementById("user_name").value;
     const password = document.getElementById("password").value;
 
-
     // Create a new employee object
-
     const newEmployee = {
         salutation,
         firstName,
@@ -234,17 +227,9 @@ empForm_fetch.addEventListener('click', function (e) {
         username,
         password
     };
-    console.log("before validation/validation error!")
-    console.log(newEmployee);
-
 
     // Sending the employee data to the server
-
-    console.log(FormValidation())//for printing the rturn value form the function
-
     if (FormValidation()) {
-        console.log("after validation")
-        console.log(newEmployee);
         fetch('http://localhost:3000/employees', {
             method: 'POST',
             headers: {
@@ -252,24 +237,34 @@ empForm_fetch.addEventListener('click', function (e) {
             },
             body: JSON.stringify(newEmployee)
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Employee added:', data);
+        .then(response => response.json())
+        .then(data => {
+            console.log('Employee added:', data);
 
+            // Image upload
+            const uploadImage = document.getElementById('input-file');
+            const formData = new FormData();
+            formData.append("avatar", uploadImage.files[0]);
+
+            fetch(`http://localhost:3000/employees/${data.id}/avatar`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(res => {
+                console.log('Image uploaded:', res);
                 FormValidationSuccessPopup();
                 clearForm();
                 readEmployee();
-
-
-
             })
             .catch(error => {
-                console.error('Error adding employee:', error);
+                console.error('Error uploading image:', error);
             });
+        })
+        .catch(error => {
+            console.error('Error adding employee:', error);
+        });
     }
-
 });
-
 //form validation
 
 function FormValidation() {
@@ -528,7 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // function for deleting the employee from the api and also from the api
 function deleteDataFromAPI(empid) {
-    $("#deletePopupModal").modal("show");
+    $("#deletePopupModal").modal("show");//shpwing the delete poopup modal
     overlay.style.display = "block";
 
     console.log(empid)
@@ -549,6 +544,7 @@ function deleteDataFromAPI(empid) {
 
                 console.log('Data deleted successfully:', data);
                 readEmployee();
+
             })
     })
 
@@ -700,27 +696,9 @@ function openEditEmployee(empid) {
 }
 
 
-
-
-//image uploading
-document.getElementById('uploadBtn').addEventListener('click', function () {
-
-    document.getElementById('fileInput').click(); // Trigger a click event on the hidden file input element
-});
-
-// document.getElementById('fileInput').addEventListener('change', function () {
-
-//     const selectedFile = this.files[0];
-//     if (selectedFile) {
-//         // You can add code here to handle the selected file, such as uploading it to a server or displaying it on the page.
-//         console.log('Selected file:', selectedFile.name);
-//     }
-// });
-
-
 // pagination 
 
-var CurrentPage=1;
+var CurrentPage = 1;
 
 function pagination(totalPages) {
     console.log(totalPages);
@@ -754,7 +732,7 @@ function pagination(totalPages) {
     }
 
     if (CurrentPage === totalPages) {
-        pageRightButton.classList.add('hidden');    
+        pageRightButton.classList.add('hidden');
     } else {
         pageRightButton.classList.remove('hidden');
     }
@@ -775,3 +753,21 @@ function pagination(totalPages) {
 }
 
 //end of pagination
+
+
+//image uploading
+
+const dropArea = document.getElementById('drop-area');//area for image uoloading
+const inputFile = document.getElementById('input-file');
+const imgView = document.getElementById('img-view');
+inputFile.addEventListener("change", uploadImage);
+function uploadImage() {
+    let imgLink = URL.createObjectURL(inputFile.files[0]);//creating url for image
+    const imgTAG = document.createElement('img');
+    imgTAG.src = imgLink;
+    imgView.textContent = "";//removing the image one the employee is added
+    imgView.appendChild(imgTAG);
+    imgView.style.border = 0;
+    imgView.style.width = '200px'
+}
+//end of image uploading
