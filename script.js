@@ -614,95 +614,7 @@ modalDelete.addEventListener("click", function () {
 
 //end of modal delte close
 // function for appeaaring edit employee
-function openEditEmployee(empid) {
-    const openEditEmployeeForm = document.getElementById("edit-emp-form");
-    const overlay = document.getElementById("overlay");
-
-    openEditEmployeeForm.style.display = "block";
-    overlay.style.display = "block";
-
-    console.log("before fetch in edit");
-
-    fetch(`http://localhost:3000/employees/${empid}`)
-        .then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            console.log(data);
-
-            document.getElementById("Editsalutation").value = data.salutation;
-            document.getElementById("EditfirstName").value = data.firstName;
-            document.getElementById("EditlastName").value = data.lastName;
-            document.getElementById("Editemail").value = data.email;
-            document.getElementById("Editphone").value = data.phone;
-            document.getElementById("Editdateofbirth").value = changeformat(data.dob);
-
-            function changeformat(val) {
-                const Array = val.split('-');
-                let day = Array[2];
-                let month = Array[1];
-                let year = Array[0];
-                let formatteddate = day + "-" + month + "-" + year;
-                return formatteddate;
-            }
-
-            document.getElementById("EditAddress").value = data.address;
-            document.getElementById("Editcountry").value = data.country;
-            document.getElementById("Editstate").value = data.state;
-            document.getElementById("Editcity").value = data.city;
-            document.getElementById("Editpincode").value = data.pincode;
-            document.getElementById("Edituser_name").value = data.username;
-            document.getElementById("Editpassword").value = data.password;
-            document.getElementById("Editqualification").value = data.qualifications;
-            document.querySelector(".gender").value = data.gender;
-
-            var empupdate = document.getElementById('formupdate');
-            empupdate.addEventListener('click', async (e) => {
-                e.preventDefault();
-
-                let editdateformat = document.getElementById("Editdateofbirth").value;
-                console.log(editdateformat);
-                let editdate = changeformat(editdateformat);
-
-                const updatedEmployeeData = {
-                    salutation: document.getElementById("Editsalutation").value,
-                    firstName: document.getElementById("EditfirstName").value,
-                    lastName: document.getElementById("EditlastName").value,
-                    email: document.getElementById("Editemail").value,
-                    phone: document.getElementById("Editphone").value,
-                    dob: editdate,
-                    country: document.getElementById("Editcountry").value,
-                    state: document.getElementById("Editstate").value,
-                    address: document.getElementById("EditAddress").value,
-                    city: document.getElementById("Editcity").value,
-                    pincode: document.getElementById("Editpincode").value,
-                    qualifications: document.getElementById("Editqualification").value,
-                    username: document.getElementById("Edituser_name").value,
-                    password: document.getElementById("Editpassword").value,
-                    gender: document.querySelector('input[name="gender"]:checked').value
-                };
-                console.log(updatedEmployeeData);
-
-                // Use await to wait for the fetch request to complete
-                await fetch(`http://localhost:3000/employees/${empid}`, {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(updatedEmployeeData),
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        readEmployee();
-                        function close_editform() {
-                            openEditEmployeeForm.style.display = "none";
-                            overlay.style.display = "none";
-                        }
-                        close_editform(); // Call the function to close the form
-                    })
-            });
-        });
-}
+  
 
 
 // pagination 
@@ -763,7 +675,99 @@ function pagination(totalPages) {
 
 //end of pagination
 
+function openEditEmployee(empid) {
+    const openEditEmployeeForm = document.getElementById("edit-emp-form");
+    const overlay = document.getElementById("overlay");
 
+    openEditEmployeeForm.style.display = "block";
+    overlay.style.display = "block";
+
+    console.log("before fetch in edit");
+
+    fetch(`http://localhost:3000/employees/${empid}`)
+        .then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            console.log(data);
+
+            document.getElementById("Editsalutation").value = data.salutation;
+            document.getElementById("EditfirstName").value = data.firstName;
+            document.getElementById("EditlastName").value = data.lastName;
+            document.getElementById("Editemail").value = data.email;
+            document.getElementById("Editphone").value = data.phone;
+            document.getElementById("Editdateofbirth").value = changeformat(data.dob);
+
+            function changeformat(val) {
+                const Array = val.split('-');
+                let day = Array[2];
+                let month = Array[1];
+                let year = Array[0];
+                let formatteddate = day + "-" + month + "-" + year;
+                return formatteddate;
+            }
+
+            document.getElementById("EditAddress").value = data.address;
+            document.getElementById("Editcountry").value = data.country;
+            document.getElementById("Editstate").value = data.state;
+            document.getElementById("Editcity").value = data.city;
+            document.getElementById("Editpincode").value = data.pincode;
+            document.getElementById("Edituser_name").value = data.username;
+            document.getElementById("Editpassword").value = data.password;
+            document.getElementById("Editqualification").value = data.qualifications;
+            document.querySelector(".gender").value = data.gender;
+
+            //image preview
+            let viewimage=document.getElementById("view-img-section")
+            viewimage.src=`http://localhost:3000/employees/${empid}/avatar'`
+
+            var empupdate = document.getElementById('formupdate');
+            empupdate.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                let editdateformat = document.getElementById("Editdateofbirth").value;
+                console.log(editdateformat);
+                let editdate = changeformat(editdateformat);
+
+                const updatedEmployeeData = {
+                    salutation: document.getElementById("Editsalutation").value,
+                    firstName: document.getElementById("EditfirstName").value,
+                    lastName: document.getElementById("EditlastName").value,
+                    email: document.getElementById("Editemail").value,
+                    phone: document.getElementById("Editphone").value,
+                    dob: editdate,
+                    country: document.getElementById("Editcountry").value,
+                    state: document.getElementById("Editstate").value,
+                    address: document.getElementById("EditAddress").value,
+                    city: document.getElementById("Editcity").value,
+                    pincode: document.getElementById("Editpincode").value,
+                    qualifications: document.getElementById("Editqualification").value,
+                    username: document.getElementById("Edituser_name").value,
+                    password: document.getElementById("Editpassword").value,
+                    gender: document.querySelector('input[name="gender"]:checked').value
+                };
+                console.log(updatedEmployeeData);
+
+                // Use await to wait for the fetch request to complete
+                await fetch(`http://localhost:3000/employees/${empid}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedEmployeeData),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        readEmployee();
+                        function close_editform() {
+                            openEditEmployeeForm.style.display = "none";
+                            overlay.style.display = "none";
+                        }
+                        close_editform(); // Call the function to close the form
+                    })
+            });
+        });
+}
 //image uploading
 
 const dropArea = document.getElementById('drop-area');//area for image uoloading

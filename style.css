@@ -868,8 +868,12 @@ ul {
     width: 100%;
 }
 .upload-section img{
-    width: 100%;
-}
+    
+        width: 100px;
+        top: 46px;
+        position: absolute;
+        left: 65px;
+    }
 td img{
     width: 30px;
     height: 30px;
@@ -877,4 +881,7 @@ td img{
 }
 .upload-icon{
     width:20px !important;
+}
+.upload-icon-image img{
+    width:0 !important;
 }
