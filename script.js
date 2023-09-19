@@ -16,7 +16,7 @@ function clearForm() {
     document.getElementById("password").value = "";
     document.getElementById("dateofbirth").value = "";
     document.getElementById('Address').value = "";
-    
+
 }
 
 // for password visibility
@@ -33,9 +33,17 @@ togglePassword.addEventListener('click', function () {
     }
 });
 
+ // Check if the clicked element is not part of the menu
 
+document.addEventListener("click", function(event) {
+    const dropDownContent = document.getElementById("dropdown-content-menu");
 
-// js for 3 dot menu//
+   
+    if (!dropDownContent.contains(event.target)) {
+        closeMenu(); // Close the menu
+    }
+});
+ //3dot menu
 function openMenu(empID) {
     const dropDownContent = document.getElementById("dropdown-content-menu");
     dropDownContent.innerHTML = `
@@ -55,7 +63,12 @@ function openMenu(empID) {
     `;
     dropDownContent.style.display = "block";
 
+    // Stop propagation of the click event to prevent it from reaching the document level
+    event.stopPropagation();
 }
+
+
+
 // end of 3 dot menu view//
 
 //closing 3dot menu
@@ -238,32 +251,32 @@ empForm_fetch.addEventListener('click', function (e) {
             },
             body: JSON.stringify(newEmployee)
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Employee added:', data);
+            .then(response => response.json())
+            .then(data => {
+                console.log('Employee added:', data);
 
-            // Image upload
-            const uploadImage = document.getElementById('input-file');
-            const formData = new FormData();
-            formData.append("avatar", uploadImage.files[0]);
+                // Image upload
+                const uploadImage = document.getElementById('input-file');
+                const formData = new FormData();
+                formData.append("avatar", uploadImage.files[0]);
 
-            fetch(`http://localhost:3000/employees/${data.id}/avatar`, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(res => {
-                console.log('Image uploaded:', res);
-                FormValidationSuccessPopup();
-                clearForm();
-                readEmployee();
+                fetch(`http://localhost:3000/employees/${data.id}/avatar`, {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(res => {
+                        console.log('Image uploaded:', res);
+                        FormValidationSuccessPopup();
+                        clearForm();
+                        readEmployee();
+                    })
+                    .catch(error => {
+                        console.error('Error uploading image:', error);
+                    });
             })
             .catch(error => {
-                console.error('Error uploading image:', error);
+                console.error('Error adding employee:', error);
             });
-        })
-        .catch(error => {
-            console.error('Error adding employee:', error);
-        });
     }
 });
 //form validation
@@ -421,11 +434,15 @@ function FormValidation() {
 
 
     //pincode
+    
     if (pincode === "") {
         errorMessagePin.style.display = 'flex';
         hasError = false;
-    } else {
+
+    }
+    else {
         errorMessagePin.style.display = 'none';
+
     }
 
     //usr name
@@ -545,11 +562,11 @@ function deleteDataFromAPI(empid) {
 
                 console.log('Data deleted successfully:', data);
 
-                function openSucessdeleteModal(){
-                    const openSucessdeleteModal=document.getElementById("DeleteSucesspopup");
-                    const Openoverlay=document.getElementById("overlay");
-                    openSucessdeleteModal.style.display="block";
-                    Openoverlay.style.display="block";
+                function openSucessdeleteModal() {
+                    const openSucessdeleteModal = document.getElementById("DeleteSucesspopup");
+                    const Openoverlay = document.getElementById("overlay");
+                    openSucessdeleteModal.style.display = "block";
+                    Openoverlay.style.display = "block";
                 }
                 openSucessdeleteModal();
                 readEmployee();
@@ -614,7 +631,7 @@ modalDelete.addEventListener("click", function () {
 
 //end of modal delte close
 // function for appeaaring edit employee
-  
+
 
 
 // pagination 
@@ -684,6 +701,16 @@ function openEditEmployee(empid) {
 
     console.log("before fetch in edit");
 
+    // Move the changeformat function outside of openEditEmployee
+    function changeformat(val) {
+        const Array = val.split('-');
+        let day = Array[2];
+        let month = Array[1];
+        let year = Array[0];
+        let formatteddate = day + "-" + month + "-" + year;
+        return formatteddate;
+    }
+
     fetch(`http://localhost:3000/employees/${empid}`)
         .then(function (res) {
             return res.json();
@@ -695,17 +722,9 @@ function openEditEmployee(empid) {
             document.getElementById("EditlastName").value = data.lastName;
             document.getElementById("Editemail").value = data.email;
             document.getElementById("Editphone").value = data.phone;
+
+            // Use the changeformat function here
             document.getElementById("Editdateofbirth").value = changeformat(data.dob);
-
-            function changeformat(val) {
-                const Array = val.split('-');
-                let day = Array[2];
-                let month = Array[1];
-                let year = Array[0];
-                let formatteddate = day + "-" + month + "-" + year;
-                return formatteddate;
-            }
-
             document.getElementById("EditAddress").value = data.address;
             document.getElementById("Editcountry").value = data.country;
             document.getElementById("Editstate").value = data.state;
@@ -714,11 +733,11 @@ function openEditEmployee(empid) {
             document.getElementById("Edituser_name").value = data.username;
             document.getElementById("Editpassword").value = data.password;
             document.getElementById("Editqualification").value = data.qualifications;
-            document.querySelector(".gender").value = data.gender;
-
-            //image preview
-            let viewimage=document.getElementById("view-img-section")
-            viewimage.src=`http://localhost:3000/employees/${empid}/avatar'`
+           const gender =  document.querySelector(".gender").value = data.gender;
+            console.log(gender);
+            // image preview
+            let viewimage = document.getElementById("view-img-section")
+            viewimage.src = `http://localhost:3000/employees/${empid}/avatar`
 
             var empupdate = document.getElementById('formupdate');
             empupdate.addEventListener('click', async (e) => {
@@ -747,27 +766,44 @@ function openEditEmployee(empid) {
                 };
                 console.log(updatedEmployeeData);
 
-                // Use await to wait for the fetch request to complete
-                await fetch(`http://localhost:3000/employees/${empid}`, {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(updatedEmployeeData),
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        readEmployee();
-                        function close_editform() {
-                            openEditEmployeeForm.style.display = "none";
-                            overlay.style.display = "none";
-                        }
-                        close_editform(); // Call the function to close the form
-                    })
+                // Use try-catch for error handling
+                try {
+                    // Use await to wait for the fetch request to complete
+                    const response = await fetch(`http://localhost:3000/employees/${empid}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedEmployeeData),
+                    });
+                //     const fileUpload = document.getElementById("view-img-section");
+                //     const formData = new FormData();
+                //     formData.append("avatar", fileUpload.files[0]);
+            
+                //     fetch(`http://localhost:3000/employees/${employee.id}/avatar`, {
+                //         method: 'POST',
+                //         body: formData,
+                //  } )
+                    //edit employee update image 
+
+                    
+                    if (!response.ok) {
+                        throw new Error('Error updating employee data');
+                    }
+                    
+
+                    const data = await response.json();
+                    console.log(data);
+                    readEmployee();
+                    // Move close_editform outside the fetch block
+                    CloseEditEmpForm();
+                } catch (error) {
+                    console.error(error);
+                }
             });
         });
 }
+
 //image uploading
 
 const dropArea = document.getElementById('drop-area');//area for image uoloading
@@ -785,3 +821,41 @@ function uploadImage() {
 
 }
 //end of image uploading
+
+//js for closing edit empoyee form
+function CloseEditEmpForm() {
+    const CloseEditEmpForm = document.getElementById("edit-emp-form")
+    const EditEmpOverlay = document.getElementById("overlay");
+    EditEmpOverlay.style.display = "none";
+    CloseEditEmpForm.style.display = "none";
+}
+
+//end od closing edit employee form
+
+//function for edit image
+function editimage(){
+    document.getElementById('file-input').click();
+}
+function editImage() {
+    // Trigger a click event on the hidden file input element
+    document.getElementById('file-input').click();
+}
+
+// Function to handle file selection and display the selected image
+document.getElementById('file-input').addEventListener('change', function() {
+    const fileInput = this;
+    const imgElement = document.getElementById('view-img-section');
+
+    // Check if a file is selected
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        // Set up a callback function to run when the image is loaded
+        reader.onload = function(e) {
+            imgElement.src = e.target.result;
+        };
+
+        // Read the selected image file as a data URL and display it
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});

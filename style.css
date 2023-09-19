@@ -467,7 +467,7 @@
 }
 
 .input_box {
-    opacity: 0.5;
+    /* opacity: 0.5; */
     font-size: 14px !important;
     height: 50px !important;
     border-radius: 16px !important;
@@ -479,7 +479,7 @@
 .textbox_head {
     font-size: 14px;
     color: #2B3674;
-}
+}   
 
 .final_submit {
     display: inline-flex;
@@ -671,6 +671,13 @@ ul {
     margin-bottom: 25px;
     text-align: center;
 
+}
+.view-img-section img{
+    width: 140px !important;
+    height: 135px !important;
+    position: absolute;
+    left: 20px;
+    top: 68px;
 }
 .view-img-section_add_emp{
     display: none;
@@ -869,10 +876,12 @@ ul {
 }
 .upload-section img{
     
-        width: 100px;
-        top: 46px;
-        position: absolute;
-        left: 65px;
+    width: 194px;
+    top: 46px;
+    height: 132px;
+    position: absolute;
+    left: 30px;
+  
     }
 td img{
     width: 30px;

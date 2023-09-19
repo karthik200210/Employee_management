@@ -46,6 +46,9 @@ function detailsEmployee(empid) {
                  <div class="col-4">
                      <div class="column-container details_box rounded-4" id="user_age">
                          <label>Age</label>
+
+                        <div>${Age(employee.dob)}</div>
+                   
                      </div>
                  </div>
                  <div class="col-4">
@@ -104,3 +107,15 @@ function detailsEmployee(empid) {
 }
 
 detailsEmployee(empid); 
+
+function Age(dob) {
+    let currentDate = new Date();
+    // let dobDate = new Date(dob);
+    const [date,month,year] = dob.split('-');
+    console.log(year)
+    
+    
+    const age = currentDate.getFullYear() - year;
+
+    return age;
+}
