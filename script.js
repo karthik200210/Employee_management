@@ -16,6 +16,9 @@ function clearForm() {
     document.getElementById("password").value = "";
     document.getElementById("dateofbirth").value = "";
     document.getElementById('Address').value = "";
+    document.getElementById('drop-area').value = "";
+    document.getElementById('input-file').value = "";
+    document.getElementById('img-view').value = "";
 
 }
 
@@ -33,17 +36,17 @@ togglePassword.addEventListener('click', function () {
     }
 });
 
- // Check if the clicked element is not part of the menu
+// Check if the clicked element is not part of the menu
 
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
     const dropDownContent = document.getElementById("dropdown-content-menu");
 
-   
+
     if (!dropDownContent.contains(event.target)) {
         closeMenu(); // Close the menu
     }
 });
- //3dot menu
+//3dot menu
 function openMenu(empID) {
     const dropDownContent = document.getElementById("dropdown-content-menu");
     dropDownContent.innerHTML = `
@@ -312,8 +315,10 @@ function FormValidation() {
     var errorMessageUsrName = document.getElementById('errormessageUsrname');
     var errorMessagePass = document.getElementById('errormessagePass');
 
+
     let hasError = true;
     const validNamePattern = /^[A-Za-z]+$/; //for name validation
+
 
     //salutation 
 
@@ -326,6 +331,11 @@ function FormValidation() {
     }
 
     // first name
+
+    document.getElementById("firstName").addEventListener('input', function () {
+        errorMessageFirstName.style.display = 'none';
+    });
+
     if (firstName === "") {
         errorMessageFirstName.style.display = 'flex';
     }
@@ -338,6 +348,11 @@ function FormValidation() {
     }
 
     // last name
+
+    document.getElementById("lastName").addEventListener('input', function () {
+        errorMessageLastName.style.display = 'none';
+    });
+
     if (lastName === "") {
         errorMessageLastName.style.display = 'flex';
     }
@@ -355,6 +370,10 @@ function FormValidation() {
 
     const validEmailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
+    document.getElementById("email").addEventListener('input', function () {
+        errorMessageEmail.style.display = 'none';
+    });
+
     if (email === "") {
         errorMessageEmail.style.display = 'flex';
     } else if (!validEmailPattern.test(email)) {
@@ -367,6 +386,9 @@ function FormValidation() {
 
     // phone number
     const validPhonePattern = /^\d{10}$/;
+    document.getElementById("phone").addEventListener('input', function () {
+        errorMessagePhone.style.display = 'none';
+    });
 
     if (phone === "") {
         errorMessagePhone.style.display = 'flex';
@@ -380,6 +402,9 @@ function FormValidation() {
 
     //dob
 
+    document.getElementById("dateofbirth").addEventListener('input', function () {
+        errorMessageDob.style.display = 'none';
+    });
     if (dob === "") {
         errorMessageDob.style.display = 'flex';
         hasError = false;
@@ -388,7 +413,9 @@ function FormValidation() {
     }
 
     //address
-
+    document.getElementById("Address").addEventListener('input', function () {
+        errorMessageAddress.style.display = 'none';
+    });
     if (address === "") {
         errorMessageAddress.style.display = 'flex';
         hasError = false;
@@ -398,6 +425,9 @@ function FormValidation() {
 
     //qualification
 
+    document.getElementById("qualification").addEventListener('input', function () {
+        errorMessageQualification.style.display = 'none';
+    });
     if (qualifications === "") {
         errorMessageQualification.style.display = 'flex';
         hasError = false;
@@ -406,6 +436,9 @@ function FormValidation() {
     }
 
     //country
+    document.getElementById("country").addEventListener('input', function () {
+        errorMessageCountry.style.display = 'none';
+    });
 
     if (country === "" || country == "Select a country") {
         errorMessageCountry.style.display = 'flex';
@@ -416,6 +449,9 @@ function FormValidation() {
 
     //state
 
+    document.getElementById("state").addEventListener('input', function () {
+        errorMessageState.style.display = 'none';
+    });
     if (state === "" || state == "Select a state") {
         errorMessageState.style.display = 'flex';
         hasError = false;
@@ -424,7 +460,9 @@ function FormValidation() {
     }
 
     //city
-
+    document.getElementById("city").addEventListener('input', function () {
+        errorMessageCity.style.display = 'none';
+    });
     if (city === "" || city == 'Select a city') {
         errorMessageCity.style.display = 'flex';
         hasError = false;
@@ -434,7 +472,11 @@ function FormValidation() {
 
 
     //pincode
-    
+
+    document.getElementById("pincode").addEventListener('input', function () {
+        errorMessagePin.style.display = 'none';
+    });
+
     if (pincode === "") {
         errorMessagePin.style.display = 'flex';
         hasError = false;
@@ -447,6 +489,10 @@ function FormValidation() {
 
     //usr name
 
+    document.getElementById("user_name").addEventListener('input', function () {
+        errorMessageUsrName.style.display = 'none';
+    });
+
     if (username === "") {
         errorMessageUsrName.style.display = 'flex';
         hasError = false;
@@ -455,6 +501,9 @@ function FormValidation() {
     }
 
     //password
+    document.getElementById("password").addEventListener('input', function () {
+        errorMessagePass.style.display = 'none';
+    });
 
     if (password === "") {
         errorMessagePass.style.display = 'flex';
@@ -531,11 +580,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const employeeForm = document.getElementById("emp-form");
     const overlay = document.getElementById("overlay");
 
+
     closeButton.addEventListener("click", function () {
 
         employeeForm.style.display = "none";
         overlay.style.display = "none";
         clearForm();
+        window.location = "http://127.0.0.1:5500/index.html";
     });
 });
 
@@ -612,11 +663,11 @@ function openViewEmployeeDetails(empid) {
 
     const viewEmpProfile = document.getElementById("viewprofile_emp");
 
-    viewEmpProfile.addEventListener("click", function () {
-        window.location.href = `viewemployee.html?id=${empid}`;
+    // viewEmpProfile.addEventListener("click", function () {
+    window.location.href = `viewemployee.html?id=${empid}`;
 
 
-    });
+
 }
 //end of view employee details
 //js for modal closing in delete employee
@@ -733,7 +784,7 @@ function openEditEmployee(empid) {
             document.getElementById("Edituser_name").value = data.username;
             document.getElementById("Editpassword").value = data.password;
             document.getElementById("Editqualification").value = data.qualifications;
-           const gender =  document.querySelector(".gender").value = data.gender;
+            const gender = document.querySelector(".gender").value = data.gender;
             console.log(gender);
             // image preview
             let viewimage = document.getElementById("view-img-section")
@@ -776,35 +827,62 @@ function openEditEmployee(empid) {
                         },
                         body: JSON.stringify(updatedEmployeeData),
                     });
-                //     const fileUpload = document.getElementById("view-img-section");
-                //     const formData = new FormData();
-                //     formData.append("avatar", fileUpload.files[0]);
-            
-                //     fetch(`http://localhost:3000/employees/${employee.id}/avatar`, {
-                //         method: 'POST',
-                //         body: formData,
-                //  } )
-                    //edit employee update image 
+                    const fileUpload = document.getElementById("file-input-EDIT");
+                    const formData = new FormData();
+                    formData.append("avatar", fileUpload.files[0]);
 
-                    
+                    fetch(`http://localhost:3000/employees/${empid}/avatar`, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    // edit employee update image 
+
+
                     if (!response.ok) {
                         throw new Error('Error updating employee data');
                     }
-                    
+
 
                     const data = await response.json();
+                    Editsuccesspopup();
                     console.log(data);
                     readEmployee();
-                    // Move close_editform outside the fetch block
                     CloseEditEmpForm();
-                } catch (error) {
+
+                }
+                catch (error) {
                     console.error(error);
                 }
             });
+
         });
 }
+//open  edit success
+function Editsuccesspopup() {
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = "flex";
+    const temp = document.getElementById("EditSucesspopup");
+    temp.style.display = "block";
+    console.log(overlay);
+    // alert("Hi");
 
-//image uploading
+}
+
+//for closing the edit succesfull modal
+
+const EditSuccessModal = document.getElementById("EditSucesspopup");
+const closeeditsuccessmodal = document.getElementById("close_modal_edit_sucess")
+
+closeeditsuccessmodal.addEventListener("click", function () {
+    EditSuccessModal.style.display = "none";
+    overlay.style.display = "none";
+    readEmployee();
+window.location = "http://127.0.0.1:5500/index.html";
+});
+
+//end
+
+//image uploadingin add employee
 
 const dropArea = document.getElementById('drop-area');//area for image uoloading
 const inputFile = document.getElementById('input-file');
@@ -814,7 +892,7 @@ function uploadImage() {
     let imgLink = URL.createObjectURL(inputFile.files[0]);//creating url for image
     const imgTAG = document.createElement('img');
     imgTAG.src = imgLink;
-    imgView.textContent = " ";//removing the image one the employee is added
+    imgView.textContent = " null";//removing the image one the employee is added
     imgView.appendChild(imgTAG);
     imgView.style.border = 0;
     imgView.style.width = '200px';
@@ -826,23 +904,20 @@ function uploadImage() {
 function CloseEditEmpForm() {
     const CloseEditEmpForm = document.getElementById("edit-emp-form")
     const EditEmpOverlay = document.getElementById("overlay");
-    EditEmpOverlay.style.display = "none";
+    // EditEmpOverlay.style.display = "none";
     CloseEditEmpForm.style.display = "none";
 }
 
 //end od closing edit employee form
 
 //function for edit image
-function editimage(){
-    document.getElementById('file-input').click();
-}
-function editImage() {
-    // Trigger a click event on the hidden file input element
-    document.getElementById('file-input').click();
+
+function editimage() {
+    document.getElementById('file-input-EDIT').click();
 }
 
 // Function to handle file selection and display the selected image
-document.getElementById('file-input').addEventListener('change', function() {
+document.getElementById('file-input-EDIT').addEventListener('change', function () {
     const fileInput = this;
     const imgElement = document.getElementById('view-img-section');
 
@@ -851,7 +926,7 @@ document.getElementById('file-input').addEventListener('change', function() {
         const reader = new FileReader();
 
         // Set up a callback function to run when the image is loaded
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             imgElement.src = e.target.result;
         };
 
@@ -859,3 +934,27 @@ document.getElementById('file-input').addEventListener('change', function() {
         reader.readAsDataURL(fileInput.files[0]);
     }
 });
+
+//function for previe in add employee
+function AddEmppreviewImage(event) {
+    var input = event.target;
+    var previewImage = document.getElementById('preview-image');
+    var changeButton = document.getElementById('changeButton');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            changeButton.style.display = 'block'; // Shows the change button button
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function AddempopenFileManager() {
+    document.getElementById('input-file').click();
+}
+
+//function for popup message for edit success employee

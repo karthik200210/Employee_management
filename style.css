@@ -337,7 +337,7 @@
 }
 
 .pagination button {
-    background-color: #FFF;    
+    background-color: #FFF;
     border: transparent;
     border-radius: 8px;
     border: transparent;
@@ -347,8 +347,9 @@
     justify-content: space-between;
     color: #4318FF;
 }
+
 /* the buttons in the pagination will affect this css style dynamically */
-.PageNumBtns{
+.PageNumBtns {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -471,7 +472,7 @@
     font-size: 14px !important;
     height: 50px !important;
     border-radius: 16px !important;
-    border: 1px solid#B6BBC7;
+    border: 1px solid#B6BBC7 !important;
     box-shadow: none !important;
 
 }
@@ -479,7 +480,7 @@
 .textbox_head {
     font-size: 14px;
     color: #2B3674;
-}   
+}
 
 .final_submit {
     display: inline-flex;
@@ -672,14 +673,17 @@ ul {
     text-align: center;
 
 }
-.view-img-section img{
+
+.view-img-section img {
     width: 140px !important;
     height: 135px !important;
     position: absolute;
     left: 20px;
     top: 68px;
+    border-radius: 10px;
 }
-.view-img-section_add_emp{
+
+.view-img-section_add_emp {
     display: none;
 }
 
@@ -753,7 +757,7 @@ ul {
     border-radius: 100%;
     border: 4px solid white;
     height: 100px;
-    width:100px;
+    width: 100px;
 
 }
 
@@ -774,7 +778,7 @@ ul {
 }
 
 .details_box {
-   
+
     height: 91px;
     padding: 21px 0px 27px 22px;
     align-items: flex-start;
@@ -858,39 +862,82 @@ ul {
     right: 25px;
     top: 52px;
 }
+
 /* css for no employee message popup */
-.NoEmpFoundPopupModal
-{
-    display:none;
+.NoEmpFoundPopupModal {
+    display: none;
 }
+
 /* endof no employee ppup modal */
 
-.hidden{
+.hidden {
     display: none !important;
 }
+
 /* .upload_image{
     width: 100%;
 } */
-.upload_image img{
+.upload_image img {
     width: 100%;
 }
-.upload-section img{
-    
+
+.upload-section img {
+
     width: 194px;
     top: 46px;
     height: 132px;
     position: absolute;
-    left: 30px;
-  
-    }
-td img{
+    left: 30px; 
+    border-radius:10px;
+   
+
+}
+
+td img {
     width: 30px;
     height: 30px;
     border-radius: 100%;
 }
-.upload-icon{
-    width:20px !important;
+
+.upload-icon {
+    width: 20px !important;
 }
-.upload-icon-image img{
-    width:0 !important;
+
+.upload-icon-image img {
+    width: 0 !important;
 }
+
+.input_box::placeholder {
+    color: #bababa !important;
+    opacity: 50% !important;
+    /* Replace with your desired color code */
+}
+
+.img-sectionadd {
+    display: none;
+}
+/* custim button for add employee */
+.Addchgbtn {
+    display: none;
+    position: absolute;
+    left: 260px;
+    top: 130px;
+}
+
+.searchicon {
+     position: absolute;
+     right: 10px; 
+     top: 10px;
+
+}
+.searchbaricon{
+    padding-left: 10px;
+}
+.searchbars{
+    position: relative;
+}
+
+.EditSucesspopup
+{
+    display: none;
+} 

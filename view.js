@@ -14,7 +14,7 @@ function detailsEmployee(empid) {
 
 
             document.getElementById("container_view_profile").innerHTML =
-             `
+                `
              <div class=" profile row pt-3 rounded-4 mb-5">
              <div class="col">
                  <div class="bg_image">
@@ -92,6 +92,39 @@ function detailsEmployee(empid) {
                  </div>
              </div>
 
+
+         <div class="row mt-4 ">
+         <div class="col-6">
+             <div class="column-container details_box rounded-4" id="user_address">
+                 <label>Qualifications</label>
+                 <div> ${employee.qualifications}</div>
+             </div>
+         </div>
+
+         <div class="col-6">
+             <div class="column-container details_box rounded-4" id="user_name">
+                 <label>Mobile Number</label>
+                 <div> ${employee.phone}</div>
+             </div>
+         </div>
+     </div>
+
+     <div class="row mt-4 ">
+     <div class="col-6">
+         <div class="column-container details_box rounded-4" id="user_address">
+             <label>Country</label>
+             <div> ${employee.country}</div>
+         </div>
+     </div>
+
+     <div class="col-6">
+         <div class="column-container details_box rounded-4" id="user_name">
+             <label>City</label>
+             <div> ${employee.city}</div>
+         </div>
+     </div>
+ </div>
+
              <div class=" row mb-3 mt-3 ">
                  <div class="final_submit mb-3  p-3  rounded-3  ">
                      <div class="contents_submit ">
@@ -106,15 +139,15 @@ function detailsEmployee(empid) {
         })
 }
 
-detailsEmployee(empid); 
+detailsEmployee(empid);
 
 function Age(dob) {
     let currentDate = new Date();
     // let dobDate = new Date(dob);
-    const [date,month,year] = dob.split('-');
+    const [date, month, year] = dob.split('-');
     console.log(year)
-    
-    
+
+
     const age = currentDate.getFullYear() - year;
 
     return age;
